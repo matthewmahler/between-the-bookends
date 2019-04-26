@@ -14,7 +14,6 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.0",
     "dotenv": "^7.0.0",
-    "faker": "^4.1.0",
     "gatsby": "^2.3.14",
     "gatsby-image": "^2.0.38",
     "gatsby-plugin-google-fonts": "^0.0.4",
@@ -27,18 +26,14 @@
     "gatsby-source-instagram-all": "^2.0.5",
     "gatsby-transformer-remark": "^2.3.8",
     "gatsby-transformer-sharp": "^2.1.18",
+    "mauerwerk": "^2.0.2",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.5.0",
-    "react-masonry-css": "^1.0.12",
-    "react-parallax": "^2.2.0",
-    "react-spotify-player": "^1.0.4",
     "react-spring": "^8.0.19",
-    "styled-components": "^4.2.0",
-    "styled-reset": "^2.0.5"
+    "styled-components": "^4.2.0"
   }
 }

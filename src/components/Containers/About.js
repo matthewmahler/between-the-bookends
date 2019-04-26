@@ -1,12 +1,12 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
-import Album from './Album';
 
 const Container = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
     url(${props => props.bg});
   background-size: cover;
+  box-shadow: 0 0 2em 2em ${props => props.theme.black} inset;
   min-height: 100vh;
   display: grid;
   justify-items: center;
@@ -17,7 +17,9 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 70%;
-    background: ${props => props.theme.lightGray}dd;
+    max-width: 960px;
+    box-sizing: border-box;
+    background: ${props => props.theme.lightBlue}dd;
     color: ${props => props.theme.black};
     padding: 3em;
     border-radius: 30px;
@@ -28,13 +30,13 @@ const Container = styled.div`
       border-bottom: 3px solid ${props => props.theme.blue};
     }
     button {
-      margin-top: 2em;
+      margin: 2em;
       outline: none;
       border: white 1px solid;
       cursor: pointer;
       background: ${props => props.theme.blue};
       position: relative;
-      font-size: 2em;
+      font-size: 1em;
       color: ${props => props.theme.white};
       padding: 0.5em 1em;
       border-radius: 10px;
@@ -42,11 +44,13 @@ const Container = styled.div`
     }
 
     button:hover {
+      transition: 0.1s;
       box-shadow: 0 4px ${props => props.theme.blueGray};
       top: 2px;
     }
 
     button:active {
+      transition: 0.1s;
       box-shadow: 0 0 ${props => props.theme.blueGray};
       top: 6px;
     }
@@ -62,6 +66,11 @@ const Container = styled.div`
     img {
       max-width: 100%;
       border-radius: 30px;
+      transition: 0.2s;
+    }
+    img:hover {
+      transition: 0.2s;
+      border-radius: 100px;
     }
   }
 `;
@@ -97,8 +106,8 @@ const About = props => {
           profileImages,
           backgroundImages,
         } = data.contentfulAbout;
-        let index = Math.round(Math.random() * 7);
-        let currentBG = backgroundImages[index].file.url;
+        const index = Math.round(Math.random() * 7);
+        const currentBG = backgroundImages[index].file.url;
         return (
           <Container bg={currentBG} theme={props.theme}>
             <div className="about">
@@ -110,12 +119,17 @@ const About = props => {
               />
               <div className="profileImages">
                 {profileImages.map((img, i) => {
-                  return <img src={img.fluid.src} key={i} />;
+                  return <img src={img.fluid.src} key={i} alt="profile pic" />;
                 })}
               </div>
-              <button>▼</button>
+              <div className="buttons">
+                <button onClick={() => props.handleClick(1)}>The Record</button>
+                <button onClick={() => props.handleClick(2)}>Making Of</button>
+                <button onClick={() => props.handleClick(3)}>
+                  Your Stories
+                </button>
+              </div>
             </div>
-            <Album />
           </Container>
         );
       }}

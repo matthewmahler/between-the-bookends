@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { useTransition, animated } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
 import { createGlobalStyle } from 'styled-components';
 import useForm from '../hooks/useForm';
@@ -6,8 +7,11 @@ import useForm from '../hooks/useForm';
 import Layout from '../components/Layout';
 import Landing from '../components/Containers/Landing';
 import About from '../components/Containers/About';
+import Album from '../components/Containers/Album';
 
 import '../fonts/fonts.css';
+import MakingOf from '../components/Containers/MakingOf';
+import Blog from '../components/Containers/Blog';
 
 const theme = {
   white: '#eeeeee',
@@ -41,12 +45,29 @@ html{
     }
     
   }
+  ::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
 `;
 
 const HomePage = () => {
-  const correctPassword = 'banana';
+  const correctPassword = 'feeny';
   const { password, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
+  const [pageIndex, setPage] = useState(0);
+
+  function handleClick(index) {
+    console.log('clicked index', index);
+    setPage(index);
+  }
+
+  const pages = [
+    <About theme={theme} handleClick={handleClick} />,
+    <Album theme={theme} handleClick={handleClick} />,
+    <MakingOf theme={theme} handleClick={handleClick} />,
+    <Blog theme={theme} handleClick={handleClick} />,
+  ];
 
   function enter() {
     if (password.password === correctPassword) {
@@ -81,7 +102,7 @@ const HomePage = () => {
               bg={contentfulAbout.landingImage.file.url}
             />
           ) : (
-            <About theme={theme} />
+            pages[pageIndex]
           )}
         </Layout>
       )}

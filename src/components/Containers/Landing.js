@@ -60,6 +60,7 @@ const Landing = props => {
           name="password"
           id=""
           onChange={props.handleChange}
+          value={props.password}
         />
         <input type="submit" value="Enter" />
       </form>

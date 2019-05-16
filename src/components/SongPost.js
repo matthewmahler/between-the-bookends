@@ -9,8 +9,8 @@ const Container = styled.div`
   display: ${props => (props.showPost ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
-  width: 80%;
-
+  width: 50%;
+  max-width: 960px;
   padding: 1em;
   background-color: ${props => props.theme.lightBlue};
   color: ${props => props.theme.black};

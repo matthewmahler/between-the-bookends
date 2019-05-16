@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useForm = callback => {
-  const [password, setPassword] = useState('');
+  const [values, setValues] = useState({});
 
   const handleSubmit = event => {
     if (event) event.preventDefault();
@@ -10,8 +10,8 @@ const useForm = callback => {
 
   const handleChange = event => {
     event.persist();
-    setPassword(password => ({
-      ...password,
+    setValues(values => ({
+      ...values,
       [event.target.name]: event.target.value,
     }));
   };
@@ -19,7 +19,7 @@ const useForm = callback => {
   return {
     handleChange,
     handleSubmit,
-    password,
+    values,
   };
 };
 

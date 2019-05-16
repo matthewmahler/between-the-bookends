@@ -8,6 +8,7 @@ import Layout from '../components/Layout';
 import Landing from '../components/Containers/Landing';
 import About from '../components/Containers/About';
 import Album from '../components/Containers/Album';
+import Form from '../components/Containers/Form';
 
 import '../fonts/fonts.css';
 import MakingOf from '../components/Containers/MakingOf';
@@ -53,7 +54,7 @@ html{
 
 const HomePage = () => {
   const correctPassword = 'feeny';
-  const { password, handleChange, handleSubmit } = useForm(enter);
+  const { values, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
   const [pageIndex, setPage] = useState(0);
 
@@ -67,13 +68,14 @@ const HomePage = () => {
     <Album theme={theme} handleClick={handleClick} />,
     <MakingOf theme={theme} handleClick={handleClick} />,
     <Blog theme={theme} handleClick={handleClick} />,
+    <Form theme={theme} handleClick={handleClick} />,
   ];
 
   function enter() {
-    if (password.password === correctPassword) {
+    if (values.password === correctPassword) {
       toggleLogin(true);
     } else {
-      console.log(password);
+      console.log(values.password);
     }
   }
   return (
@@ -100,6 +102,7 @@ const HomePage = () => {
               handleSubmit={handleSubmit}
               isLoggedIn={isLoggedIn}
               bg={contentfulAbout.landingImage.file.url}
+              password={values.password}
             />
           ) : (
             pages[pageIndex]

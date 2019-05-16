@@ -62,6 +62,21 @@ const Container = styled.div`
       color: ${props => props.theme.blue};
     }
   }
+  .storyButton {
+    margin: 0.5em;
+    padding: 0.5em;
+    font-size: 1.5em;
+    width: 40%;
+    border: 1px solid ${props => props.theme.white};
+    color: ${props => props.theme.white};
+    border-radius: 0.5em;
+    background-color: ${props => props.theme.blue};
+    cursor: pointer;
+    :hover {
+      background-color: ${props => props.theme.darkBlue};
+      color: ${props => props.theme.lightBlue};
+    }
+  }
 `;
 
 const Blog = props => {
@@ -110,6 +125,12 @@ const Blog = props => {
             <div className="blogHeader">
               <h1>{data.contentfulBlogPage.title}</h1>
               <p>{data.contentfulBlogPage.subtitle}</p>
+              <button
+                className="storyButton"
+                onClick={() => props.handleClick(4)}
+              >
+                Write a Story
+              </button>
             </div>
             <div className="wrapper">
               {blogPosts.map((blogPost, index) => (

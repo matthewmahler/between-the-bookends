@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
+import { animated, useSpring } from 'react-spring';
+
 import useForm from '../hooks/useForm';
 import Layout from '../components/Layout';
 import Landing from '../components/Containers/Landing';
@@ -66,6 +68,13 @@ const Container = styled.div`
 `;
 
 const HomePage = () => {
+  const fade = useSpring({
+    from: {
+      opacity: 0,
+    },
+
+    opacity: 1,
+  });
   const correctPassword = 'feeny';
   const { values, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
@@ -95,48 +104,50 @@ const HomePage = () => {
   }
 
   return (
-    <StaticQuery
-      query={graphql`
-        query HomePage {
-          contentfulAbout {
-            name
-            landingImage {
-              file {
-                url
+    <animated.div style={fade}>
+      <StaticQuery
+        query={graphql`
+          query HomePage {
+            contentfulAbout {
+              name
+              landingImage {
+                file {
+                  url
+                }
               }
-            }
-            backgroundImages {
-              file {
-                url
+              backgroundImages {
+                file {
+                  url
+                }
               }
             }
           }
-        }
-      `}
-      render={({ contentfulAbout }) => {
-        const currentBG =
-          contentfulAbout.backgroundImages[pageBackground].file.url;
-        return (
-          <Layout>
-            <GlobalStyle />
-            {!isLoggedIn ? (
-              <Landing
-                theme={theme}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                isLoggedIn={isLoggedIn}
-                bg={contentfulAbout.landingImage.file.url}
-                password={values.password}
-              />
-            ) : (
-              <Container bg={currentBG} theme={theme}>
-                {pages[pageIndex]}
-              </Container>
-            )}
-          </Layout>
-        );
-      }}
-    />
+        `}
+        render={({ contentfulAbout }) => {
+          const currentBG =
+            contentfulAbout.backgroundImages[pageBackground].file.url;
+          return (
+            <Layout>
+              <GlobalStyle />
+              {!isLoggedIn ? (
+                <Landing
+                  theme={theme}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                  isLoggedIn={isLoggedIn}
+                  bg={contentfulAbout.landingImage.file.url}
+                  password={values.password}
+                />
+              ) : (
+                <Container bg={currentBG} theme={theme}>
+                  {pages[pageIndex]}
+                </Container>
+              )}
+            </Layout>
+          );
+        }}
+      />
+    </animated.div>
   );
 };
 

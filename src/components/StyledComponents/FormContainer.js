@@ -49,7 +49,7 @@ const Container = styled.div`
       min-width: 30vw;
     }
     .postBody {
-      min-width: 50vw;
+      width: 90%;
       min-height: 40vh;
     }
     button {

@@ -16,6 +16,7 @@ const Form = props => {
     opacity: 1,
   });
   const { values, handleChange, handleSubmit } = useForm(submitForm);
+  const [submitSuccess, handleSubmission] = useState(false);
   const [progress, updateProgress] = useState(0);
 
   //submit form
@@ -99,7 +100,10 @@ const Form = props => {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, cors, *same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    }).then(response => updateProgress(100));
+    }).then(response => {
+      updateProgress(100);
+      handleSubmission(true);
+    });
   }
 
   return (

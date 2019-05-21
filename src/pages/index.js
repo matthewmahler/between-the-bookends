@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-// import { useTransition, animated } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import useForm from '../hooks/useForm';
-
 import Layout from '../components/Layout';
 import Landing from '../components/Containers/Landing';
 import About from '../components/Containers/About';
 import Album from '../components/Containers/Album';
 import Form from '../components/Containers/Form';
-
 import '../fonts/fonts.css';
 import MakingOf from '../components/Containers/MakingOf';
 import Blog from '../components/Containers/Blog';
@@ -52,12 +49,30 @@ html{
   }
 `;
 
+const Container = styled.div`
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+    url(${props => props.bg});
+  background-size: cover;
+  box-shadow: 0 0 2em 2em ${props => props.theme.black} inset;
+  min-height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  font-family: 'miller';
+  div {
+    width: 100%;
+  }
+`;
+
 const HomePage = () => {
   const correctPassword = 'feeny';
   const { values, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
   const [pageIndex, setPage] = useState(0);
-
+  const [pageBackground, setPageBackground] = useState(
+    Math.floor(Math.random() * 7)
+  );
   function handleClick(index) {
     console.log('clicked index', index);
     setPage(index);
@@ -78,6 +93,7 @@ const HomePage = () => {
       console.log(values.password);
     }
   }
+
   return (
     <StaticQuery
       query={graphql`
@@ -89,26 +105,37 @@ const HomePage = () => {
                 url
               }
             }
+            backgroundImages {
+              file {
+                url
+              }
+            }
           }
         }
       `}
-      render={({ contentfulAbout }) => (
-        <Layout>
-          <GlobalStyle />
-          {!isLoggedIn ? (
-            <Landing
-              theme={theme}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              isLoggedIn={isLoggedIn}
-              bg={contentfulAbout.landingImage.file.url}
-              password={values.password}
-            />
-          ) : (
-            pages[pageIndex]
-          )}
-        </Layout>
-      )}
+      render={({ contentfulAbout }) => {
+        const currentBG =
+          contentfulAbout.backgroundImages[pageBackground].file.url;
+        return (
+          <Layout>
+            <GlobalStyle />
+            {!isLoggedIn ? (
+              <Landing
+                theme={theme}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                isLoggedIn={isLoggedIn}
+                bg={contentfulAbout.landingImage.file.url}
+                password={values.password}
+              />
+            ) : (
+              <Container bg={currentBG} theme={theme}>
+                {pages[pageIndex]}
+              </Container>
+            )}
+          </Layout>
+        );
+      }}
     />
   );
 };

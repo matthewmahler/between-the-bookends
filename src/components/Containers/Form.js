@@ -1,101 +1,36 @@
-import React from 'react';
-import styled from 'styled-components';
-import useForm from '../../hooks/useForm';
+import React, { useState } from 'react';
+import { animated, useSpring } from 'react-spring';
 import { createClient } from 'contentful-management';
+import useForm from '../../hooks/useForm';
+import FormContainer from '../StyledComponents/FormContainer';
 const client = createClient({
   accessToken: process.env.GATSBY_CONTENT_MANAGEMENT_TOKEN,
 });
 
-const Container = styled.div`
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
-  background-size: cover;
-  box-shadow: 0 0 2em 2em ${props => props.theme.black} inset;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'miller';
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    .dateSig {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    .field {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1em;
-    }
-    label {
-      font-size: 2em;
-      margin-bottom: 0.5em;
-    }
-
-    .title,
-    .postBody,
-    .postDate,
-    .signature {
-      padding: 0.5em;
-
-      font-size: 1.5em;
-      background-color: ${props => props.theme.white};
-      color: ${props => props.theme.black};
-    }
-    .title {
-      min-width: 30vw;
-    }
-    .postBody {
-      min-width: 50vw;
-      min-height: 40vh;
-    }
-    button {
-      width: 100%;
-      background-color: ${props => props.theme.darkBlue};
-      color: ${props => props.theme.white};
-      padding: 1em;
-      margin: 1em 0;
-      font-size: 2em;
-      border: 3px solid ${props => props.theme.lightBlue};
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  }
-  .back {
-    position: absolute;
-    margin: 1em;
-    padding: 0.5em;
-    top: 50vh;
-    left: 0;
-    border: 1px solid ${props => props.theme.blue};
-    border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
-    cursor: pointer;
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
-    }
-  }
-`;
-
 const Form = props => {
+  const fade = useSpring({
+    from: {
+      opacity: 0,
+    },
+
+    opacity: 1,
+  });
   const { values, handleChange, handleSubmit } = useForm(submitForm);
+  const [progress, updateProgress] = useState(0);
+
+  //submit form
+  //create entry
+  //publish entry
+  //link entry
+  //rebuild
 
   function submitForm() {
-    console.log(values);
     const entry_id = Math.floor(Math.random() * 1000000);
     const keys = Object.keys(values);
     const pairs = Object.values(values);
     let result = {};
     keys.forEach((key, i) => (result[key] = { 'en-US': pairs[i] }));
-    console.log(result);
+    console.log('post submitted: ', result);
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
       .then(space => space.getEnvironment('master'))
@@ -106,75 +41,126 @@ const Form = props => {
           },
         })
       )
-      .then(() => publishEntry(entry_id))
+      .then(entry => publishEntry(entry, entry_id))
       .catch(console.error);
+    updateProgress(25);
   }
-  function publishEntry(entry_id) {
+  function publishEntry(entry, entry_id) {
+    console.log('entry publishing: ', entry);
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
-      .then(space => space.getEntry(entry_id))
+      .then(space => space.getEnvironment('master'))
+      .then(environment => environment.getEntry(entry_id))
       .then(entry => entry.publish())
-      .then(entry => console.log(`Entry ${entry.sys.id} published.`))
+      .then(() => linkEntry(entry_id))
       .catch(console.error);
+    updateProgress(50);
+  }
+
+  function linkEntry(entry_id) {
+    const blogPageId = '01Mqn4sAJ8kRaqwHEIhfFQ';
+    const newPost = {
+      sys: {
+        type: 'Link',
+        linkType: 'Entry',
+        id: JSON.stringify(entry_id),
+      },
+    };
+    client
+      .getSpace(process.env.GATSBY_SPACE_ID)
+      .then(space => space.getEnvironment('master'))
+      .then(environment => environment.getEntry(blogPageId))
+      .then(entry => {
+        console.log('blogPage updating: ', entry);
+
+        entry.fields.blogPosts['en-US'].push(newPost);
+
+        return entry.update();
+      })
+      .then(() => republishBlogPage(blogPageId))
+      .catch(console.error);
+    updateProgress(75);
+  }
+  function republishBlogPage(blogPageId) {
+    console.log('blogPage republishing publishing:', blogPageId);
+    client
+      .getSpace(process.env.GATSBY_SPACE_ID)
+      .then(space => space.getEnvironment('master'))
+      .then(environment => environment.getEntry(blogPageId))
+      .then(entry => entry.publish())
+      .then(() => triggerRebuild(blogPageId))
+      .catch(console.error);
+    updateProgress(95);
+  }
+  function triggerRebuild(entry_id) {
+    const url = `https://api.netlify.com/build_hooks/5cddeec89caf5bf9cf5b4fba?trigger_title=${entry_id}`;
+
+    fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    }).then(response => updateProgress(100));
   }
 
   return (
-    <Container theme={props.theme}>
-      <div className="formContainer">
-        <form action="" onSubmit={handleSubmit}>
-          <div className="field">
-            <label className="label">Title</label>
-            <input
-              className="title"
-              type="text"
-              name="title"
-              onChange={handleChange}
-              value={values.title}
-              required
-            />
-          </div>
-          <div className="field">
-            <label className="label">Body</label>
-            <textarea
-              className="postBody"
-              type="textarea"
-              name="postBody"
-              onChange={handleChange}
-              value={values.postBody}
-              required
-            />
-          </div>
-          <div className="dateSig">
+    <FormContainer theme={props.theme}>
+      <animated.div style={fade}>
+        <div className="formContainer">
+          <form action="" onSubmit={handleSubmit}>
             <div className="field">
-              <label className="label">Date</label>
+              <label className="label">Title</label>
               <input
-                className="postDate"
-                type="date"
-                name="postDate"
+                className="title"
+                type="text"
+                name="title"
                 onChange={handleChange}
-                value={values.postDate}
+                value={values.title}
                 required
               />
             </div>
             <div className="field">
-              <label className="label">Signature (optional)</label>
-              <input
-                className="signature"
-                type="text"
-                name="signature"
+              <label className="label">Body</label>
+              <textarea
+                className="postBody"
+                type="textarea"
+                name="postBody"
                 onChange={handleChange}
-                value={values.signature}
+                value={values.postBody}
+                required
               />
             </div>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+            <div className="dateSig">
+              <div className="field">
+                <label className="label">Date</label>
+                <input
+                  className="postDate"
+                  type="date"
+                  name="postDate"
+                  onChange={handleChange}
+                  value={values.postDate}
+                  required
+                />
+              </div>
+              <div className="field">
+                <label className="label">Signature (optional)</label>
+                <input
+                  className="signature"
+                  type="text"
+                  name="signature"
+                  onChange={handleChange}
+                  value={values.signature}
+                />
+              </div>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
 
-      <button className="back" onClick={() => props.handleClick(0)}>
-        Back
-      </button>
-    </Container>
+        <button className="back" onClick={() => props.handleClick(0)}>
+          Back
+        </button>
+      </animated.div>
+    </FormContainer>
   );
 };
 

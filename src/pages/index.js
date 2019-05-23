@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
 import { animated, useSpring } from 'react-spring';
-
+import BackgroundImage from 'gatsby-background-image';
 import useForm from '../hooks/useForm';
 import Layout from '../components/Layout';
 import Landing from '../components/Containers/Landing';
@@ -111,8 +111,12 @@ const HomePage = () => {
             contentfulAbout {
               name
               landingImage {
-                file {
-                  url
+                fluid {
+                  aspectRatio
+                  src
+                  tracedSVG
+                  srcSet
+                  sizes
                 }
               }
               backgroundImages {
@@ -130,14 +134,20 @@ const HomePage = () => {
             <Layout>
               <GlobalStyle />
               {!isLoggedIn ? (
-                <Landing
-                  theme={theme}
-                  handleChange={handleChange}
-                  handleSubmit={handleSubmit}
-                  isLoggedIn={isLoggedIn}
-                  bg={contentfulAbout.landingImage.file.url}
-                  password={values.password}
-                />
+                <BackgroundImage
+                  Tag="section"
+                  fluid={contentfulAbout.landingImage.fluid}
+                  fadeIn
+                  backgroundColor={theme.black}
+                >
+                  <Landing
+                    theme={theme}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    isLoggedIn={isLoggedIn}
+                    password={values.password}
+                  />
+                </BackgroundImage>
               ) : (
                 <Container bg={currentBG} theme={theme}>
                   {pages[pageIndex]}

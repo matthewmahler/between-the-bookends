@@ -3,6 +3,7 @@ import { animated, useSpring } from 'react-spring';
 import { createClient } from 'contentful-management';
 import useForm from '../../hooks/useForm';
 import FormContainer from '../StyledComponents/FormContainer';
+import ProgressBar from '../ProgressBar';
 const client = createClient({
   accessToken: process.env.GATSBY_CONTENT_MANAGEMENT_TOKEN,
 });
@@ -18,6 +19,7 @@ const Form = props => {
   const { values, handleChange, handleSubmit } = useForm(submitForm);
   const [submitSuccess, handleSubmission] = useState(false);
   const [progress, updateProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   //submit form
   //create entry
@@ -44,6 +46,7 @@ const Form = props => {
       )
       .then(entry => publishEntry(entry, entry_id))
       .catch(console.error);
+    setLoading(true);
     updateProgress(25);
   }
   function publishEntry(entry, entry_id) {
@@ -110,6 +113,12 @@ const Form = props => {
     <FormContainer theme={props.theme}>
       <animated.div style={fade}>
         <div className="formContainer">
+          <ProgressBar
+            theme={props.theme}
+            progress={progress}
+            loading={loading}
+            submitSuccess={submitSuccess}
+          />
           <form action="" onSubmit={handleSubmit}>
             <div className="field">
               <label className="label">Title</label>

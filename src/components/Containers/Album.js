@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring, useTransition } from 'react-spring';
+
 import AlbumContainer from '../StyledComponents/AlbumContainer';
-import SongCard from '../SongCard';
+import SongCardWrapper from '../StyledComponents/SongCardWrapper';
 import SongPost from '../SongPost';
 
 const Album = props => {
+  const [chosenSong, setSong] = useState(0);
+  const [showPost, togglePost] = useState(false);
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -13,9 +16,12 @@ const Album = props => {
 
     opacity: 1,
   });
-  const [chosenSong, setSong] = useState(0);
-  const [showPost, togglePost] = useState(false);
-
+  const transitions = useTransition(showPost, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    immediate: !showPost,
+  });
   function handleCardClick(index, toggle) {
     setSong(index);
     togglePost(toggle);
@@ -49,6 +55,12 @@ const Album = props => {
                       html
                     }
                   }
+                  lyrics {
+                    childMarkdownRemark {
+                      excerpt
+                      html
+                    }
+                  }
                 }
               }
             }
@@ -59,22 +71,27 @@ const Album = props => {
 
           return (
             <AlbumContainer theme={props.theme} showPost={!showPost}>
-              <div className="wrapper">
-                {songs.map((song, index) => (
-                  <SongCard
-                    song={song.node}
-                    key={index}
+              {transitions.map(({ item, key, props: animation }) =>
+                !item ? (
+                  <SongCardWrapper
+                    key={key}
+                    songs={songs}
+                    showPost={showPost}
+                    handleCardClick={handleCardClick}
                     theme={props.theme}
-                    action={() => handleCardClick(index, !showPost)}
                   />
-                ))}
-              </div>
-              <SongPost
-                theme={props.theme}
-                song={songs[chosenSong].node}
-                showPost={showPost}
-                action={() => handleCardClick(0, !showPost)}
-              />
+                ) : (
+                  <animated.div style={animation}>
+                    <SongPost
+                      theme={props.theme}
+                      song={songs[chosenSong].node}
+                      showPost={showPost}
+                      action={() => handleCardClick(0, !showPost)}
+                    />
+                  </animated.div>
+                )
+              )}
+
               <button className="back" onClick={() => props.handleClick(0)}>
                 Back
               </button>

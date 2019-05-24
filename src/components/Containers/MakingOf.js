@@ -2,9 +2,8 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
-
-import MakingOfMedia from '../MakingOfMedia';
 import MakingOfContainer from '../StyledComponents/MakingOfContainer';
+import TimeLinePoint from '../TimeLinePoint';
 
 const Line = styled.div`
   border-left: 1px solid ${props => props.theme.blue};
@@ -37,12 +36,21 @@ const MakingOf = props => {
             contentfulMaking {
               title
               subtitle
-              media {
+              timelinePoint {
                 title
-                file {
-                  contentType
-                  url
-                  fileName
+                date
+                media {
+                  fluid {
+                    aspectRatio
+                    src
+                    tracedSVG
+                    srcSet
+                    sizes
+                  }
+                  file {
+                    contentType
+                    url
+                  }
                 }
               }
             }
@@ -58,10 +66,10 @@ const MakingOf = props => {
               <h1>{data.contentfulMaking.title}</h1>
               <h2>{data.contentfulMaking.subtitle}</h2>
               <div className="timeline">
-                {data.contentfulMaking.media.map((asset, i) => {
-                  return asset.file.contentType === 'image/jpeg' ? (
+                {data.contentfulMaking.timelinePoint.map((point, key) =>
+                  key % 2 === 0 ? (
                     <>
-                      <MakingOfMedia {...asset} theme={props.theme} key={i} />
+                      <TimeLinePoint point={point} theme={props.theme} />
                       <Line theme={props.theme} />
                       <div />
                     </>
@@ -69,10 +77,10 @@ const MakingOf = props => {
                     <>
                       <div />
                       <Line theme={props.theme} />
-                      <MakingOfMedia {...asset} theme={props.theme} key={i} />
+                      <TimeLinePoint point={point} theme={props.theme} />
                     </>
-                  );
-                })}
+                  )
+                )}
               </div>
               <button className="back" onClick={() => props.handleClick(0)}>
                 Back

@@ -1,17 +1,9 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
-import MakingOfContainer from '../StyledComponents/MakingOfContainer';
+import MakingOfContainer from '../StyledContainers/MakingOfContainer';
 import TimeLinePoint from '../TimeLinePoint';
-
-const Line = styled.div`
-  border-left: 1px solid ${props => props.theme.blue};
-  border-right: 1px solid ${props => props.theme.blue};
-  background-color: ${props => props.theme.white};
-  width: 100%;
-  height: 100%;
-`;
+import Button from '../UI/Button';
 
 const MakingOf = props => {
   const fade = useSpring({
@@ -65,26 +57,32 @@ const MakingOf = props => {
             <MakingOfContainer theme={props.theme} bg={currentBG}>
               <h1>{data.contentfulMaking.title}</h1>
               <h2>{data.contentfulMaking.subtitle}</h2>
-              <div className="timeline">
+              <Button
+                handleClick={props.handleClick}
+                clickIndex={0}
+                margin="1em "
+                backgroundColor={props.theme.white}
+                border={`${props.theme.blue} 1px solid`}
+                fontColor={props.theme.black}
+                shadow={props.theme.blueGray}
+                padding="1em 2em"
+                size="1em"
+              >
+                Back
+              </Button>
+              <ul className="timeline">
                 {data.contentfulMaking.timelinePoint.map((point, key) =>
                   key % 2 === 0 ? (
-                    <>
+                    <li>
                       <TimeLinePoint point={point} theme={props.theme} />
-                      <Line theme={props.theme} />
-                      <div />
-                    </>
+                    </li>
                   ) : (
-                    <>
-                      <div />
-                      <Line theme={props.theme} />
+                    <li>
                       <TimeLinePoint point={point} theme={props.theme} />
-                    </>
+                    </li>
                   )
                 )}
-              </div>
-              <button className="back" onClick={() => props.handleClick(0)}>
-                Back
-              </button>
+              </ul>
             </MakingOfContainer>
           );
         }}

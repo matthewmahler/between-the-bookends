@@ -13,8 +13,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Sentinels`,
-        short_name: `Sentinels`,
+        name: `Between the Bookends`,
+        short_name: `Between the Bookends`,
         start_url: `/`,
         background_color: `#343537`,
         theme_color: `#A06367`,

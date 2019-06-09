@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import TimeLineMedia from './TimeLineMedia';
@@ -8,8 +8,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 30vw;
-  max-width: 400px;
   background: ${props => props.theme.white}bb;
   color: ${props => props.theme.black};
   border-radius: 1em;

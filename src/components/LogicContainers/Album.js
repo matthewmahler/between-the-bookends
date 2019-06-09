@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring, useTransition } from 'react-spring';
 
-import AlbumContainer from '../StyledComponents/AlbumContainer';
-import SongCardWrapper from '../StyledComponents/SongCardWrapper';
+import AlbumContainer from '../StyledContainers/AlbumContainer';
+import SongCardWrapper from '../SongCardWrapper';
 import SongPost from '../SongPost';
+import Button from '../UI/Button';
 
 const Album = props => {
   const [chosenSong, setSong] = useState(0);
@@ -92,9 +93,19 @@ const Album = props => {
                 )
               )}
 
-              <button className="back" onClick={() => props.handleClick(0)}>
+              <Button
+                handleClick={props.handleClick}
+                clickIndex={0}
+                margin="1em "
+                backgroundColor={props.theme.white}
+                border={`${props.theme.blue} 1px solid`}
+                fontColor={props.theme.black}
+                shadow={props.theme.blueGray}
+                padding="1em 2em"
+                size="1em"
+              >
                 Back
-              </button>
+              </Button>
             </AlbumContainer>
           );
         }}
@@ -104,3 +115,18 @@ const Album = props => {
 };
 
 export default Album;
+
+// position: absolute;
+//     margin: 1em;
+//     padding: 0.5em;
+//     top: 50%;
+//     left: 0;
+//     border: 1px solid ${props => props.theme.blue};
+//     border-radius: 0.5em;
+//     background-color: ${props => props.theme.white};
+//     color: ${props => props.theme.black};
+//     cursor: pointer;
+//     :hover {
+//       background-color: ${props => props.theme.lightGray};
+//       color: ${props => props.theme.blue};
+//     }

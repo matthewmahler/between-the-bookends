@@ -3,7 +3,8 @@ import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring } from 'react-spring';
 import BlogCard from '../BlogCard';
 import BlogPost from '../BlogPost';
-import BlogContainer from '../StyledComponents/BlogContainer';
+import BlogContainer from '../StyledContainers/BlogContainer';
+import Button from '../UI/Button';
 
 const Blog = props => {
   const fade = useSpring({
@@ -71,6 +72,19 @@ const Blog = props => {
                   Write a Story
                 </button>
               </div>
+              <Button
+                handleClick={props.handleClick}
+                clickIndex={0}
+                margin="1em "
+                backgroundColor={props.theme.white}
+                border={`${props.theme.blue} 1px solid`}
+                fontColor={props.theme.black}
+                shadow={props.theme.blueGray}
+                padding="1em 2em"
+                size="1em"
+              >
+                Back
+              </Button>
               <div className="wrapper">
                 {blogPosts.map((blogPost, index) => (
                   <BlogCard
@@ -87,9 +101,6 @@ const Blog = props => {
                 showPost={showPost}
                 action={() => handleCardClick(0, !showPost)}
               />
-              <button className="back" onClick={() => props.handleClick(0)}>
-                Back
-              </button>
             </BlogContainer>
           );
         }}

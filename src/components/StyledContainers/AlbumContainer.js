@@ -21,20 +21,19 @@ const Container = styled.div`
     box-sizing: border-box;
     min-height: 60vh;
   }
-  .back {
-    position: absolute;
-    margin: 1em;
-    padding: 0.5em;
-    top: 50%;
-    left: 0;
-    border: 1px solid ${props => props.theme.blue};
-    border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
-    cursor: pointer;
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
+
+  @media (max-width: 768px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 450px) {
+    .wrapper {
+      grid-template-columns: 1fr;
+      grid-gap: 0.5em;
+    }
+    .back {
+      font-size: 0.8em;
+      top: 0;
+      left: 0;
     }
   }
 `;

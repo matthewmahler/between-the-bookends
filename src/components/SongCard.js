@@ -24,15 +24,31 @@ const Container = styled.div`
     filter: drop-shadow(5px 5px 5px ${props => props.theme.red});
   }
   h2 {
-    margin: 0.5em auto;
+    margin: 0 auto;
   }
   h4 {
-    margin: 0.5em auto;
+    margin: 1em auto;
   }
   p {
     font-size: 0.9em;
-    margin: 0.5em auto;
+    margin: 0 auto;
     max-width: 80%;
+  }
+  @media (max-width: 450px) {
+    min-height: 40px;
+    max-height: 64px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding: 0.7em;
+    h2 {
+      font-size: 1em;
+    }
+    h4 {
+      font-size: 0.8em;
+    }
+    p {
+      display: none;
+    }
   }
 `;
 const Song = props => {

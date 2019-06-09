@@ -4,7 +4,6 @@ import { useSpring, animated } from 'react-spring';
 
 const Container = styled.div`
   position: relative;
-
   .story,
   .lyrics {
     display: ${props => (props.showPost ? 'flex' : 'none')};
@@ -21,13 +20,13 @@ const Container = styled.div`
     overflow: auto;
     h1 {
       font-size: 3em;
-      margin: 0.3em auto;
-    }
-    h4 {
       margin: 0 auto;
     }
+    h4 {
+      margin: 0.5em auto;
+    }
     p {
-      padding: 0 2em;
+      padding: 0 1em;
       text-indent: 1em;
     }
   }
@@ -64,6 +63,34 @@ const Container = styled.div`
     :hover {
       background-color: ${props => props.theme.lightGray};
       color: ${props => props.theme.blue};
+    }
+  }
+  @media (max-width: 768px) {
+    .story,
+    .lyrics {
+      width: 90%;
+      max-width: 700px;
+
+      h1 {
+        font-size: 2em;
+      }
+      .flipper {
+        margin: 0.5em;
+      }
+    }
+
+    .close {
+      position: relative;
+    }
+  }
+  @media (max-width: 450px) {
+    .story,
+    .lyrics {
+      max-height: 95vh;
+      div {
+        max-height: 70vh;
+        overflow: auto;
+      }
     }
   }
 `;

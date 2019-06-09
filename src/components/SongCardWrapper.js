@@ -1,6 +1,6 @@
 import React from 'react';
 import { animated, useTrail } from 'react-spring';
-import SongCard from '../SongCard';
+import SongCard from './SongCard';
 
 const SongCardWrapper = props => {
   const trail = useTrail(props.songs.length, {

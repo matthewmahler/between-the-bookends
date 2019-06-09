@@ -5,16 +5,16 @@ import { animated, useSpring } from 'react-spring';
 import BackgroundImage from 'gatsby-background-image';
 import useForm from '../hooks/useForm';
 import Layout from '../components/Layout';
-import Landing from '../components/Containers/Landing';
-import About from '../components/Containers/About';
-import Album from '../components/Containers/Album';
-import Form from '../components/Containers/Form';
+import Landing from '../components/LogicContainers/Landing';
+import About from '../components/LogicContainers/About';
+import Album from '../components/LogicContainers/Album';
+import Form from '../components/LogicContainers/Form';
 import '../fonts/fonts.css';
-import MakingOf from '../components/Containers/MakingOf';
-import Blog from '../components/Containers/Blog';
+import MakingOf from '../components/LogicContainers/MakingOf';
+import Blog from '../components/LogicContainers/Blog';
 
 const theme = {
-  white: '#eeeeee',
+  white: '#cccccc',
   lightGray: '#bebfc1',
   gray: '#5E5F62',
   black: '#040404',
@@ -75,9 +75,9 @@ const HomePage = () => {
 
     opacity: 1,
   });
-  const correctPassword = 'feeny';
+  const correctPassword = 'memory';
   const { values, handleChange, handleSubmit } = useForm(enter);
-  const [isLoggedIn, toggleLogin] = useState(false);
+  const [isLoggedIn, toggleLogin] = useState(true);
   const [pageIndex, setPage] = useState(0);
   const [pageBackground, setPageBackground] = useState(
     Math.floor(Math.random() * 7)

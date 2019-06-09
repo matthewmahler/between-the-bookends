@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
   position: relative;
-  width: 60%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  overflow: auto;
   h1 {
     color: ${props => props.theme.white};
     font-size: 4em;
@@ -20,30 +20,37 @@ const Container = styled.div`
     margin: 0.5em;
     padding: 0;
   }
-  .back {
-    position: absolute;
-    margin: 1em;
-    padding: 0.5em;
-    top: 50vh;
-    left: 0;
-    border: 1px solid ${props => props.theme.blue};
-    border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
-    cursor: pointer;
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
-    }
-  }
+
   .timeline {
+    min-width: 60vw;
     width: auto;
-    height: 100vh;
-    overflow: scroll;
-    display: grid;
-    grid-template-columns: 1fr 20px 1fr;
+    max-width: 960px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    li {
+      margin: 1em auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8em;
+    h1 {
+      font-size: 2.2em;
+    }
+    h2 {
+      font-size: 1.3em;
+    }
+
+    .back {
+      font-size: 0.8em;
+      padding: 0.5em;
+      top: 0;
+      left: 0;
+    }
   }
 `;
 const MakingOfContainer = props => {

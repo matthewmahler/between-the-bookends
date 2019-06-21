@@ -13,12 +13,14 @@ const Container = styled.div`
   max-width: 960px;
 
   padding: 1em;
-  background-color: ${props => props.theme.lightBlue};
-  color: ${props => props.theme.black};
+  background-color: ${props => props.theme.black}ee;
+  color: ${props => props.theme.white};
   margin: 1em auto;
   h1 {
     font-size: 3em;
     margin: 0.3em auto;
+    padding: 0.1em;
+    border-bottom: 2px solid ${props => props.theme.blue};
   }
   h4 {
     margin: 0 auto;
@@ -41,6 +43,35 @@ const Container = styled.div`
     :hover {
       background-color: ${props => props.theme.lightGray};
       color: ${props => props.theme.blue};
+    }
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 700px;
+
+    h1 {
+      font-size: 2em;
+    }
+    .flipper {
+      margin: 0.5em;
+    }
+
+    .close {
+      position: relative;
+    }
+  }
+  @media (max-width: 450px) {
+    background-color: ${props => props.theme.black};
+    max-height: 95vh;
+    div {
+      max-height: 70vh;
+      overflow: auto;
+    }
+
+    .close {
+      font-size: 0.8em;
+      margin: 0.5em;
+      padding: 0.7em;
     }
   }
 `;

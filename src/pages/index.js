@@ -53,6 +53,7 @@ html{
 
 const Container = styled.div`
   width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
     url(${props => props.bg});
   background-size: cover;

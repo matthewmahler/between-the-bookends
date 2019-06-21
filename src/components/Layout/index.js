@@ -6,6 +6,7 @@ import { StaticQuery, graphql } from 'gatsby';
 const Section = styled.section`
   background: aliceblue;
   color: #333;
+  min-height: 100vh;
   & > h1 {
     font-size: 28px;
     font-weight: bold;

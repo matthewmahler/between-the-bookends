@@ -33,7 +33,9 @@ const Container = styled.div`
     label {
       font-size: 2em;
       margin-bottom: 0.5em;
+      padding: 0.1em;
       color: ${props => props.theme.white};
+      border-bottom: 2px solid ${props => props.theme.blue};
     }
 
     .title,
@@ -78,6 +80,26 @@ const Container = styled.div`
     :hover {
       background-color: ${props => props.theme.lightGray};
       color: ${props => props.theme.blue};
+    }
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 700px;
+    .back {
+      align-self: center;
+      position: relative;
+      margin: 1em;
+      padding: 0.5em;
+      border: 1px solid ${props => props.theme.blue};
+      border-radius: 0.5em;
+      background-color: ${props => props.theme.white};
+      color: ${props => props.theme.black};
+    }
+  }
+  @media (max-width: 450px) {
+    min-height: 100vh;
+    .dateSig {
+      grid-template-columns: 1fr;
     }
   }
 `;

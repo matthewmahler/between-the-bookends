@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import { animated, useSpring } from 'react-spring';
+import { animated, useSpring, useTransition } from 'react-spring';
 import BlogCard from '../BlogCard';
 import BlogPost from '../BlogPost';
+import BlogCardWrapper from '../BlogCardWrapper';
 import BlogContainer from '../StyledContainers/BlogContainer';
 import Button from '../UI/Button';
 
 const Blog = props => {
+  const [chosenBlogPost, setBlogPost] = useState(0);
+  const [showPost, togglePost] = useState(false);
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -14,8 +17,12 @@ const Blog = props => {
 
     opacity: 1,
   });
-  const [chosenBlogPost, setBlogPost] = useState(0);
-  const [showPost, togglePost] = useState(false);
+  const transitions = useTransition(showPost, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    immediate: !showPost,
+  });
 
   function handleCardClick(index, toggle) {
     setBlogPost(index);
@@ -52,7 +59,7 @@ const Blog = props => {
         `}
         render={data => {
           const blogPosts = data.contentfulBlogPage.blogPosts;
-
+          console.log(blogPosts);
           const index = Math.round(Math.random() * 7);
           const currentBG =
             data.contentfulAbout.backgroundImages[index].file.url;
@@ -72,6 +79,27 @@ const Blog = props => {
                   Write a Story
                 </button>
               </div>
+
+              {transitions.map(({ item, key, props: animation }) =>
+                !item ? (
+                  <BlogCardWrapper
+                    key={key}
+                    blogPosts={blogPosts}
+                    showPost={showPost}
+                    handleCardClick={handleCardClick}
+                    theme={props.theme}
+                  />
+                ) : (
+                  <animated.div style={animation}>
+                    <BlogPost
+                      theme={props.theme}
+                      blogPost={blogPosts[chosenBlogPost]}
+                      showPost={showPost}
+                      action={() => handleCardClick(0, !showPost)}
+                    />
+                  </animated.div>
+                )
+              )}
               <Button
                 handleClick={props.handleClick}
                 clickIndex={0}
@@ -85,22 +113,6 @@ const Blog = props => {
               >
                 Back
               </Button>
-              <div className="wrapper">
-                {blogPosts.map((blogPost, index) => (
-                  <BlogCard
-                    blogPost={blogPost}
-                    key={index}
-                    theme={props.theme}
-                    action={() => handleCardClick(index, !showPost)}
-                  />
-                ))}
-              </div>
-              <BlogPost
-                theme={props.theme}
-                blogPost={blogPosts[chosenBlogPost]}
-                showPost={showPost}
-                action={() => handleCardClick(0, !showPost)}
-              />
             </BlogContainer>
           );
         }}

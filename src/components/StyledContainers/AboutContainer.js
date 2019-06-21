@@ -13,17 +13,18 @@ const Container = styled.div`
     width: 100%;
     max-width: 960px;
     box-sizing: border-box;
-    background: ${props => props.theme.darkBlue}ee;
+    background: ${props => props.theme.black}ee;
     color: ${props => props.theme.white};
     padding: 3em;
     border-radius: 30px;
     h1 {
       font-size: 4em;
       margin: 0 auto;
-      border-bottom: 3px solid ${props => props.theme.white};
-      color: ${props => props.theme.blue};
-      text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
-        0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+      border-bottom: 3px solid ${props => props.theme.blue};
+      color: ${props => props.theme.white};
+      text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
+        0px 8px 13px ${props => props.theme.darkBlue}55,
+        0px 18px 23px ${props => props.theme.darkBlue}33;
     }
     div.buttons {
       width: auto;
@@ -33,7 +34,7 @@ const Container = styled.div`
       max-width: 700px;
     }
     @media (max-width: 450px) {
-      width: 90%;
+      width: 100%;
       max-width: 350px;
       font-size: 0.8em;
       div {
@@ -73,8 +74,8 @@ const Container = styled.div`
       }
 
       p.overlay {
-        background-color: ${props => props.theme.white};
-        color: ${props => props.theme.blue};
+        background-color: ${props => props.theme.black};
+        color: ${props => props.theme.white}ff;
         position: absolute;
         width: 80%;
         top: 40%;
@@ -84,7 +85,11 @@ const Container = styled.div`
         border-radius: 0.5em;
         font-size: 1em;
       }
-
+      @media (max-width: 768px) {
+        p.overlay {
+          font-size: 0.7em;
+        }
+      }
       @media (max-width: 450px) {
         padding: 0.5em;
         img {
@@ -94,11 +99,33 @@ const Container = styled.div`
           transition: 0.2s;
           border-radius: 15px;
         }
+        p.overlay {
+          font-size: 0.5em;
+          padding: 0 auto;
+        }
       }
     }
   }
   @media (max-width: 450px) {
     max-height: 100vh;
+    div.about {
+      padding: 1em;
+      h1 {
+        font-size: 2em;
+      }
+      div.profileImages {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .profileImageContainer {
+          margin: 0 0.2em;
+          padding: 0;
+          img {
+            border-radius: 5px !important;
+          }
+        }
+      }
+    }
   }
 `;
 const AboutContainer = ({ children, theme }) => {

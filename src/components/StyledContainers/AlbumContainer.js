@@ -27,8 +27,9 @@ const Container = styled.div`
   }
   @media (max-width: 450px) {
     .wrapper {
+      max-height: 100vh;
       grid-template-columns: 1fr;
-      grid-gap: 0.5em;
+      grid-gap: 0.3em;
     }
     .back {
       font-size: 0.8em;

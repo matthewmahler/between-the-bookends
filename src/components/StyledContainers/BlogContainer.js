@@ -30,6 +30,9 @@ const Container = styled.div`
     padding: 2em;
     h1 {
       font-size: 4em;
+      text-shadow: 0px 2px 2px ${props => props.theme.blue}99,
+        0px 4px 7px ${props => props.theme.darkBlue}55,
+        0px 9px 12px ${props => props.theme.darkBlue}33;
       color: ${props => props.theme.blue};
       margin: 0;
       padding: 0;
@@ -39,22 +42,7 @@ const Container = styled.div`
       font-size: 1.5em;
     }
   }
-  .back {
-    position: absolute;
-    margin: 1em;
-    padding: 0.5em;
-    top: 50vh;
-    left: 0;
-    border: 1px solid ${props => props.theme.blue};
-    border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
-    cursor: pointer;
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
-    }
-  }
+
   .storyButton {
     margin: 0.5em;
     padding: 0.5em;
@@ -68,6 +56,49 @@ const Container = styled.div`
     :hover {
       background-color: ${props => props.theme.darkBlue};
       color: ${props => props.theme.lightBlue};
+    }
+  }
+  @media (max-width: 768px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 450px) {
+    .wrapper {
+      max-height: 100vh;
+      grid-template-columns: 1fr;
+      grid-gap: 0.3em;
+    }
+    .back {
+      font-size: 0.7em !important;
+    }
+    .blogHeader {
+      padding: 1em;
+      h1 {
+        font-size: 2em;
+        color: ${props => props.theme.white};
+        border-bottom: 2px solid ${props => props.theme.blue};
+        margin: 0;
+        padding: 0;
+      }
+      p {
+        color: ${props => props.theme.white};
+        font-size: 1em;
+        text-align: center;
+      }
+    }
+    .storyButton {
+      margin: 0.5em;
+      padding: 0.5em;
+      font-size: 1em;
+      width: 40%;
+      border: 1px solid ${props => props.theme.white};
+      color: ${props => props.theme.white};
+      border-radius: 0.5em;
+      background-color: ${props => props.theme.blue};
+      cursor: pointer;
+      :hover {
+        background-color: ${props => props.theme.darkBlue};
+        color: ${props => props.theme.lightBlue};
+      }
     }
   }
 `;

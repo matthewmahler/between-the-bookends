@@ -14,13 +14,18 @@ const Container = styled.div`
     border-radius: 20px;
     max-width: 960px;
     padding: 1em;
-    background-color: ${props => props.theme.lightBlue};
-    color: ${props => props.theme.black};
+    background-color: ${props => props.theme.black}ee;
+    color: ${props => props.theme.white};
     margin: 1em auto;
     overflow: auto;
     h1 {
       font-size: 3em;
       margin: 0 auto;
+      padding: 0.1em;
+      border-bottom: 2px solid ${props => props.theme.blue};
+      text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
+        0px 8px 13px ${props => props.theme.darkBlue}55,
+        0px 18px 23px ${props => props.theme.darkBlue}33;
     }
     h4 {
       margin: 0.5em auto;
@@ -80,17 +85,25 @@ const Container = styled.div`
     }
 
     .close {
+      margin-top: 0.5em;
       position: relative;
     }
   }
   @media (max-width: 450px) {
     .story,
     .lyrics {
+      background-color: ${props => props.theme.black};
       max-height: 95vh;
       div {
         max-height: 70vh;
         overflow: auto;
       }
+    }
+    .close,
+    .flipper {
+      font-size: 0.8em;
+      margin: 0.5em;
+      padding: 0.7em;
     }
   }
 `;

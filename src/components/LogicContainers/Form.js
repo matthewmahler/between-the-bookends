@@ -113,19 +113,6 @@ const Form = props => {
   return (
     <FormContainer theme={props.theme}>
       <animated.div style={fade}>
-        <Button
-          handleClick={props.handleClick}
-          clickIndex={3}
-          margin="1em "
-          backgroundColor={props.theme.white}
-          border={`${props.theme.blue} 1px solid`}
-          fontColor={props.theme.black}
-          shadow={props.theme.blueGray}
-          padding="1em 2em"
-          size="1em"
-        >
-          Back
-        </Button>
         <div className="formContainer">
           <ProgressBar
             theme={props.theme}
@@ -182,6 +169,19 @@ const Form = props => {
             <button type="submit">Submit</button>
           </form>
         </div>
+        <Button
+          handleClick={props.handleClick}
+          clickIndex={3}
+          margin="1em "
+          backgroundColor={props.theme.white}
+          border={`${props.theme.blue} 1px solid`}
+          fontColor={props.theme.black}
+          shadow={props.theme.blueGray}
+          padding="1em 2em"
+          size="1em"
+        >
+          Back
+        </Button>
       </animated.div>
     </FormContainer>
   );

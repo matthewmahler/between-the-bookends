@@ -59,7 +59,7 @@ const Blog = props => {
         `}
         render={data => {
           const blogPosts = data.contentfulBlogPage.blogPosts;
-          console.log(blogPosts);
+
           const index = Math.round(Math.random() * 7);
           const currentBG =
             data.contentfulAbout.backgroundImages[index].file.url;

@@ -84,7 +84,6 @@ const HomePage = () => {
     Math.floor(Math.random() * 7)
   );
   function handleClick(index) {
-    console.log('clicked index', index);
     setPage(index);
   }
 

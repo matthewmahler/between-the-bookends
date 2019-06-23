@@ -8,13 +8,16 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: ${props => props.theme.white}bb;
-  color: ${props => props.theme.black};
+  background: ${props => props.theme.black}ee;
+  color: ${props => props.theme.white};
   border-radius: 1em;
   padding: 1em;
   box-sizing: border-box;
+  min-width: 45vw;
   h3 {
     margin-bottom: 0;
+    padding: 0.1em 0;
+    border-bottom: 2px solid ${props => props.theme.blue};
   }
 `;
 

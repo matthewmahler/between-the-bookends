@@ -59,6 +59,7 @@ const About = props => {
                         className="profileImageContainer"
                         onMouseOver={() => setHovered(i)}
                         onMouseOut={() => setHovered(null)}
+                        key={i}
                       >
                         <img
                           src={img.fluid.src}
@@ -93,6 +94,7 @@ const About = props => {
                       shadow={props.theme.blueGray}
                       padding="0.5em 1em"
                       size="1em"
+                      key={i}
                     >
                       {button.text}
                     </Button>
@@ -108,29 +110,3 @@ const About = props => {
 };
 
 export default About;
-
-// button {
-//   margin: 2em;
-//   outline: none;
-//   border: white 1px solid;
-//   cursor: pointer;
-//   background: ${props => props.theme.blue};
-//   position: relative;
-//   font-size: 1em;
-//   color: ${props => props.theme.white};
-//   padding: 0.5em 1em;
-//   border-radius: 10px;
-//   box-shadow: 0 6px ${props => props.theme.blueGray};
-// }
-
-// button:hover {
-//   transition: 0.1s;
-//   box-shadow: 0 4px ${props => props.theme.blueGray};
-//   top: 2px;
-// }
-
-// button:active {
-//   transition: 0.1s;
-//   box-shadow: 0 0 ${props => props.theme.blueGray};
-//   top: 6px;
-// }

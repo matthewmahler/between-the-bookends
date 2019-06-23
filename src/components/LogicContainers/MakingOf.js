@@ -1,7 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring } from 'react-spring';
-import MakingOfContainer from '../StyledContainers/MakingOfContainer';
+import MakingOfContainer, { Line } from '../StyledContainers/MakingOfContainer';
 import TimeLinePoint from '../TimeLinePoint';
 import Button from '../UI/Button';
 
@@ -55,8 +55,11 @@ const MakingOf = props => {
 
           return (
             <MakingOfContainer theme={props.theme} bg={currentBG}>
-              <h1>{data.contentfulMaking.title}</h1>
-              <h2>{data.contentfulMaking.subtitle}</h2>
+              <div className="header">
+                <h1>{data.contentfulMaking.title}</h1>
+                <h2>{data.contentfulMaking.subtitle}</h2>
+              </div>
+
               <Button
                 handleClick={props.handleClick}
                 clickIndex={0}
@@ -70,19 +73,23 @@ const MakingOf = props => {
               >
                 Back
               </Button>
-              <ul className="timeline">
+              <div className="timeline">
                 {data.contentfulMaking.timelinePoint.map((point, key) =>
                   key % 2 === 0 ? (
-                    <li>
+                    <>
                       <TimeLinePoint point={point} theme={props.theme} />
-                    </li>
+                      <Line />
+                      <div className="spacer" />
+                    </>
                   ) : (
-                    <li>
+                    <>
+                      <div className="spacer" />
+                      <Line />
                       <TimeLinePoint point={point} theme={props.theme} />
-                    </li>
+                    </>
                   )
                 )}
-              </ul>
+              </div>
             </MakingOfContainer>
           );
         }}

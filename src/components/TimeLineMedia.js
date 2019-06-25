@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import FsLightbox from 'fslightbox-react';
 
 import Masonry from 'react-masonry-css';
@@ -31,7 +31,7 @@ const Container = styled.div`
   }
   .my-masonry-grid_column > div {
     /* change div to reference your elements you put in <Masonry> */
-    background: grey;
+    background: transparent;
     margin-bottom: 30px;
   }
   @media all and (max-width: 1200px) {
@@ -81,16 +81,20 @@ const TimeLineMedia = props => {
       >
         {props.media.map((media, key) => {
           return media.file.contentType.includes('video') ? (
-            <div onClick={() => handleClick(key)} key={key}>
-              <video src={media.file.url} />
+            <div key={key}>
+              <video src={media.file.url} onClick={() => handleClick(key)} />
               <FsLightbox
                 toggler={index === key ? toggler : false}
                 urls={[media.file.url]}
               />
             </div>
           ) : (
-            <div onClick={() => handleClick(key)} key={key}>
-              <img src={media.file.url} />
+            <div key={key}>
+              <img
+                src={media.file.url}
+                alt={media.file.title}
+                onClick={() => handleClick(key)}
+              />
               <FsLightbox
                 toggler={index === key ? toggler : false}
                 urls={[media.file.url]}

@@ -33,6 +33,7 @@ const Container = styled.div`
         0px 8px 13px ${props => props.theme.darkBlue}55,
         0px 18px 23px ${props => props.theme.darkBlue}33;
       color: ${props => props.theme.white};
+      border-bottom: 3px solid ${props => props.theme.blue};
       margin: 0;
       padding: 0;
     }

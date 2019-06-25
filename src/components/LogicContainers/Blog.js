@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring, useTransition } from 'react-spring';
-import BlogCard from '../BlogCard';
 import BlogPost from '../BlogPost';
 import BlogCardWrapper from '../BlogCardWrapper';
 import BlogContainer from '../StyledContainers/BlogContainer';

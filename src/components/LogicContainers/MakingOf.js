@@ -32,6 +32,7 @@ const MakingOf = props => {
                 title
                 date
                 media {
+                  title
                   fluid {
                     aspectRatio
                     src

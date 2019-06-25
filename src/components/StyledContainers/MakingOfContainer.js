@@ -21,9 +21,13 @@ const Container = styled.div`
     min-width: 50vw;
     max-width: 960px;
     h1 {
+      border-bottom: 3px solid ${props => props.theme.blue};
       color: ${props => props.theme.white};
+      text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
+        0px 8px 13px ${props => props.theme.darkBlue}55,
+        0px 18px 23px ${props => props.theme.darkBlue}33;
       font-size: 4em;
-      margin-bottom: 0;
+      margin: 0;
       padding: 0;
     }
     h2 {

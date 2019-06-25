@@ -82,7 +82,7 @@ const TimeLineMedia = props => {
         {props.media.map((media, key) => {
           return media.file.contentType.includes('video') ? (
             <div onClick={() => handleClick(key)} key={key}>
-              <video src={media.file.url} preload="metadata" />
+              <video src={media.file.url} />
               <FsLightbox
                 toggler={index === key ? toggler : false}
                 urls={[media.file.url]}

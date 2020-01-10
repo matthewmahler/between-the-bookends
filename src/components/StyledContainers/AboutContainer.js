@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  font-family: 'miller';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   div.about {
     display: flex;
     flex-direction: column;

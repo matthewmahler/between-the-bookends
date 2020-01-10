@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-    url(${props => props.bg}) top left;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -78,13 +76,13 @@ const Container = styled.div`
 const Landing = props => {
   return (
     <Container theme={props.theme} bg={props.bg}>
-      <h1>between the bookends</h1>
+      <h1>Between The Bookends</h1>
       <form onSubmit={props.handleSubmit}>
         <input
           type="password"
           name="password"
           id=""
-          placeholder="Secret Code"
+          placeholder="Enter Secret"
           onChange={props.handleChange}
           value={props.password}
         />

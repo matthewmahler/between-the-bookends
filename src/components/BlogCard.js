@@ -11,6 +11,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 400px;
   height: 100%;
   min-height: 150px;
   background-color: ${props => props.theme.black}ee;
@@ -46,6 +47,27 @@ const Container = styled.div`
   @media (max-width: 450px) {
     min-height: 40px;
     max-height: 64px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding: 0.7em;
+    box-shadow: 0px 2px 1px 0 ${props => props.theme.blue}99,
+      0px 4px 7px 0 ${props => props.theme.darkBlue}55,
+      0px 9px 12px 0 ${props => props.theme.darkBlue}33;
+    h2 {
+      font-size: 1em;
+      border-bottom: 1px solid ${props => props.theme.blue};
+    }
+    h4 {
+      font-size: 0.8em;
+    }
+    p {
+      display: none;
+    }
+  }
+  @media (max-width: 769px) {
+    min-height: 40px;
+    max-height: 64px;
+    max-width: 300px;
     display: grid;
     grid-template-columns: 3fr 1fr;
     padding: 0.7em;

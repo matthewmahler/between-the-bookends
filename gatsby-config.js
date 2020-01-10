@@ -17,7 +17,7 @@ module.exports = {
         short_name: `Between the Bookends`,
         start_url: `/`,
         background_color: `#343537`,
-        theme_color: `#A06367`,
+        theme_color: `#343537`,
         // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
         // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
         display: `standalone`,

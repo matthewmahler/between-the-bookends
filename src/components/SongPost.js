@@ -46,8 +46,8 @@ const Container = styled.div`
     padding: 0.5em;
     border: 1px solid ${props => props.theme.blue};
     border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
+    background-color: transparent;
+    color: ${props => props.theme.blue};
     cursor: pointer;
     :hover {
       background-color: ${props => props.theme.lightGray};
@@ -62,8 +62,8 @@ const Container = styled.div`
     right: 0;
     border: 1px solid ${props => props.theme.blue};
     border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
+    background-color: transparent;
+    color: ${props => props.theme.blue};
     cursor: pointer;
     :hover {
       background-color: ${props => props.theme.lightGray};

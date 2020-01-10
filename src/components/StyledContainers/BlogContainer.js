@@ -6,7 +6,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'miller';
   .wrapper {
     margin: 1em auto;
     display: ${props => (props.showPost ? 'grid' : 'none')};

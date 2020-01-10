@@ -29,7 +29,14 @@ const About = props => {
                 title
                 description
                 fluid {
+                  tracedSVG
+                  srcWebp
+                  srcSetWebp
+                  srcSet
                   src
+                  sizes
+                  base64
+                  aspectRatio
                 }
               }
             }

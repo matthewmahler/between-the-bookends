@@ -34,8 +34,15 @@ const Blog = props => {
           query BlogQuery {
             contentfulAbout {
               backgroundImages {
-                file {
-                  url
+                fluid {
+                  tracedSVG
+                  srcWebp
+                  srcSetWebp
+                  srcSet
+                  src
+                  sizes
+                  base64
+                  aspectRatio
                 }
               }
             }
@@ -60,8 +67,7 @@ const Blog = props => {
           const blogPosts = data.contentfulBlogPage.blogPosts;
 
           const index = Math.round(Math.random() * 7);
-          const currentBG =
-            data.contentfulAbout.backgroundImages[index].file.url;
+          const currentBG = data.contentfulAbout.backgroundImages[index].fluid;
           return (
             <BlogContainer
               bg={currentBG}

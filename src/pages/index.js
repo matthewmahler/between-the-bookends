@@ -28,19 +28,26 @@ const theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-html{
+/* html{
     font-family: 'miller', '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', sans-serif; 
-  }
+  } */
 
   body {
     margin:0;
-  }
+    h1,
+    h2{
+  font-family: 'miller';
+
+}
+}
+  
   @media all and (max-width: 1200px) {
-    width: 100%
+    width: 100%;
     html{
       margin: 0;
     }
     h1{
+      font-family: 'miller';
       text-align: center;
     }
     
@@ -62,7 +69,6 @@ const Container = styled.div`
   display: grid;
   justify-items: center;
   align-content: center;
-  font-family: 'miller';
   div {
     width: 100%;
   }
@@ -78,7 +84,7 @@ const HomePage = () => {
   });
   const correctPassword = 'memory';
   const { values, handleChange, handleSubmit } = useForm(enter);
-  const [isLoggedIn, toggleLogin] = useState(true);
+  const [isLoggedIn, toggleLogin] = useState(false);
   const [pageIndex, setPage] = useState(0);
   const [pageBackground, setPageBackground] = useState(
     Math.floor(Math.random() * 7)
@@ -112,16 +118,26 @@ const HomePage = () => {
               name
               landingImage {
                 fluid {
-                  aspectRatio
-                  src
                   tracedSVG
+                  srcWebp
+                  srcSetWebp
                   srcSet
+                  src
                   sizes
+                  base64
+                  aspectRatio
                 }
               }
               backgroundImages {
-                file {
-                  url
+                fluid {
+                  tracedSVG
+                  srcWebp
+                  srcSetWebp
+                  srcSet
+                  src
+                  sizes
+                  base64
+                  aspectRatio
                 }
               }
             }
@@ -129,7 +145,7 @@ const HomePage = () => {
         `}
         render={({ contentfulAbout }) => {
           const currentBG =
-            contentfulAbout.backgroundImages[pageBackground].file.url;
+            contentfulAbout.backgroundImages[pageBackground].fluid;
           return (
             <Layout>
               <GlobalStyle />
@@ -149,9 +165,16 @@ const HomePage = () => {
                   />
                 </BackgroundImage>
               ) : (
-                <Container bg={currentBG} theme={theme}>
-                  {pages[pageIndex]}
-                </Container>
+                <BackgroundImage
+                  Tag="section"
+                  fluid={currentBG}
+                  fadeIn
+                  backgroundColor={theme.black}
+                >
+                  <Container bg={currentBG} theme={theme}>
+                    {pages[pageIndex]}
+                  </Container>
+                </BackgroundImage>
               )}
             </Layout>
           );

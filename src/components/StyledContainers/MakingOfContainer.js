@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
+  min-height: 250vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,19 +40,15 @@ const Container = styled.div`
   }
 
   .timeline {
-    min-width: 60vw;
+    min-width: 80vw;
     width: auto;
     max-width: 960px;
     list-style: none;
     padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1em 1fr;
-
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    div {
-      margin: 1em auto;
-    }
   }
 
   @media (max-width: 768px) {

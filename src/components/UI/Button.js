@@ -5,7 +5,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
   margin: ${props => props.margin};
-  background: ${props => props.backgroundColor};
+  background-color: ${props => props.backgroundColor}cc;
   border: ${props => props.border};
   color: ${props => props.fontColor};
   box-shadow: 0 6px ${props => props.shadow};

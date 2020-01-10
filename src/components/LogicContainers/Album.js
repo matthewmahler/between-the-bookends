@@ -32,13 +32,6 @@ const Album = props => {
       <StaticQuery
         query={graphql`
           query AlbumQuery {
-            contentfulAbout {
-              backgroundImages {
-                file {
-                  url
-                }
-              }
-            }
             allContentfulAlbum(sort: { fields: [order], order: ASC }) {
               edges {
                 node {

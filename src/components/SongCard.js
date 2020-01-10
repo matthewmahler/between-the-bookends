@@ -35,7 +35,7 @@ const Container = styled.div`
     border-bottom: 2px solid ${props => props.theme.blue};
   }
   h4 {
-    margin: 1em auto;
+    margin: 0.5em auto;
   }
   p {
     font-size: 0.9em;

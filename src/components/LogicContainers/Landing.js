@@ -56,6 +56,7 @@ const Container = styled.div`
   h1 {
     font-style: italic;
     font-size: 3em;
+    letter-spacing: 3px;
     color: ${props => props.theme.blue};
   }
 
@@ -76,7 +77,7 @@ const Container = styled.div`
 const Landing = props => {
   return (
     <Container theme={props.theme} bg={props.bg}>
-      <h1>Between The Bookends</h1>
+      <h1>between the bookends</h1>
       <form onSubmit={props.handleSubmit}>
         <input
           type="password"

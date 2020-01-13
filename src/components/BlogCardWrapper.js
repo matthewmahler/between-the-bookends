@@ -4,11 +4,9 @@ import BlogCard from './BlogCard';
 
 const BlogCardWrapper = props => {
   const trail = useTrail(props.blogPosts.length, {
-    marginLeft: 0,
     opacity: 1,
     transform: 'translate3d(0,0px,0)',
     from: {
-      marginRight: -200,
       opacity: 0,
       transform: 'translate3d(0,-20px,0)',
     },

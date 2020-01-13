@@ -6,6 +6,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0.5em auto;
   .wrapper {
     margin: 1em auto;
     display: ${props => (props.showPost ? 'grid' : 'none')};
@@ -13,7 +14,7 @@ const Container = styled.div`
     grid-gap: 1em;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     max-width: 960px;
     box-sizing: border-box;
   }
@@ -62,9 +63,10 @@ const Container = styled.div`
   }
   @media (max-width: 450px) {
     .wrapper {
-      max-height: 100vh;
-      grid-template-columns: 1fr;
-      grid-gap: 0.3em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .back {
       font-size: 0.7em !important;

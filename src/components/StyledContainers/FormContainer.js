@@ -5,14 +5,15 @@ const Container = styled.div`
   max-width: 960px;
   padding: 2em;
   box-sizing: border-box;
-  background: ${props => props.theme.black};
+  background: ${props => props.theme.black}cc;
   background-size: cover;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  margin: 0 auto;
+  border-radius: 1em;
   form {
     display: flex;
     flex-direction: column;
@@ -46,11 +47,11 @@ const Container = styled.div`
       background-color: ${props => props.theme.lightGray};
       color: ${props => props.theme.black};
     }
-    .title {
+    .title,
+    .postBody {
       min-width: 30vw;
     }
     .postBody {
-      width: 90%;
       min-height: 40vh;
     }
     button {
@@ -96,9 +97,15 @@ const Container = styled.div`
     }
   }
   @media (max-width: 450px) {
+    width: 350px;
     min-height: 100vh;
-    .dateSig {
-      grid-template-columns: 1fr;
+    form {
+      .field {
+        width: 320px;
+      }
+      .dateSig {
+        grid-template-columns: 1fr;
+      }
     }
   }
 `;

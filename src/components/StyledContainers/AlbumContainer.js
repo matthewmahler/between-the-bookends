@@ -19,7 +19,6 @@ const Container = styled.div`
     width: 80%;
     max-width: 960px;
     box-sizing: border-box;
-    min-height: 80vh;
   }
 
   @media (max-width: 768px) {

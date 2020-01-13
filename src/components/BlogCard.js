@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 const Container = styled.div`
+  margin: 0 auto;
   padding: 1em;
   box-sizing: border-box;
   border-radius: 20px;
@@ -11,7 +12,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 400px;
   height: 100%;
   min-height: 150px;
   background-color: ${props => props.theme.black}ee;

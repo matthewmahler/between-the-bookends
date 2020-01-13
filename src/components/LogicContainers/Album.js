@@ -75,7 +75,7 @@ const Album = props => {
                     theme={props.theme}
                   />
                 ) : (
-                  <animated.div style={animation}>
+                  <animated.div style={animation} key={key}>
                     <SongPost
                       theme={props.theme}
                       song={songs[chosenSong].node}

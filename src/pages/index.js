@@ -61,8 +61,7 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-    url(${props => props.bg});
+
   background-size: cover;
   box-shadow: 0 0 2em 2em ${props => props.theme.black} inset;
   min-height: 100vh;
@@ -171,9 +170,7 @@ const HomePage = () => {
                   fadeIn
                   backgroundColor={theme.black}
                 >
-                  <Container bg={currentBG} theme={theme}>
-                    {pages[pageIndex]}
-                  </Container>
+                  <Container theme={theme}>{pages[pageIndex]}</Container>
                 </BackgroundImage>
               )}
             </Layout>

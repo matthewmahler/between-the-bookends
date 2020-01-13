@@ -93,8 +93,8 @@ const MakingOf = props => {
                 </Button>
                 <div className="timeline">
                   <TimeLineMedia
-                    media={data.contentfulMaking.media}
-                    sources={sources}
+                    media={data.contentfulMaking.media.reverse()}
+                    sources={sources.reverse()}
                   />
                 </div>
               </MakingOfContainer>

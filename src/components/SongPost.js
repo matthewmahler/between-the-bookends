@@ -31,6 +31,7 @@ const Container = styled.div`
       margin: 0.5em auto;
     }
     p {
+      text-align: center;
       padding: 0 1em;
       text-indent: 1em;
     }
@@ -40,8 +41,17 @@ const Container = styled.div`
   }
   .lyrics {
     display: ${props => (!props.flipped ? 'none' : 'auto')};
+    .lyricsContainer {
+      overflow: scroll;
+      max-height: 70vh;
+
+      p {
+        margin: 0em;
+        text-indent: 0;
+      }
+    }
   }
-  .flipper {
+  button {
     margin: 1em;
     padding: 0.5em;
     border: 1px solid ${props => props.theme.blue};
@@ -54,22 +64,7 @@ const Container = styled.div`
       color: ${props => props.theme.blue};
     }
   }
-  .close {
-    position: absolute;
-    margin: 1em;
-    padding: 0.5em;
-    top: 0;
-    right: 0;
-    border: 1px solid ${props => props.theme.blue};
-    border-radius: 0.5em;
-    background-color: transparent;
-    color: ${props => props.theme.blue};
-    cursor: pointer;
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
-    }
-  }
+
   @media (max-width: 768px) {
     .story,
     .lyrics {
@@ -116,6 +111,13 @@ const SongPost = props => {
     config: { mass: 5, tension: 500, friction: 80 },
   });
 
+  const lyrics = props.song.lyrics.childMarkdownRemark.html
+    .split('\n')
+    .map((line, key) => {
+      return line.concat('<br/>');
+    })
+    .join('');
+  console.log(lyrics);
   return (
     <Container theme={props.theme} showPost={props.showPost} flipped={flipped}>
       <animated.div
@@ -136,7 +138,7 @@ const SongPost = props => {
           }}
         />
         <button className="close" onClick={props.action}>
-          Close
+          Tracklist
         </button>
       </animated.div>
       <animated.div
@@ -155,12 +157,13 @@ const SongPost = props => {
           Click For Story
         </button>
         <div
+          className="lyricsContainer"
           dangerouslySetInnerHTML={{
-            __html: props.song.lyrics.childMarkdownRemark.html,
+            __html: lyrics,
           }}
         />
         <button className="close" onClick={props.action}>
-          Close
+          Tracklist
         </button>
       </animated.div>
     </Container>

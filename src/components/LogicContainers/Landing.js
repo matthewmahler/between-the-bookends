@@ -85,7 +85,7 @@ const Landing = props => {
           id=""
           placeholder="Enter Secret"
           onChange={props.handleChange}
-          value={props.password}
+          value={props.password || ''}
         />
         <input type="submit" value="Enter" />
       </form>

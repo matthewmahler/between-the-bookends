@@ -38,15 +38,6 @@ const MakingOf = props => {
 
               media {
                 title
-                fluid {
-                  srcWebp
-                  srcSetWebp
-                  srcSet
-                  src
-                  sizes
-                  base64
-                  aspectRatio
-                }
                 file {
                   contentType
                   url

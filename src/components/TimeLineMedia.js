@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import FsLightbox from 'fslightbox-react';
-import Img from 'gatsby-image';
 import Masonry from 'react-masonry-css';
 import styled from 'styled-components';
 
@@ -77,11 +76,10 @@ const TimeLineMedia = props => {
             </div>
           ) : (
             <div key={key}>
-              <Img
-                fluid={media.fluid}
+              <img
+                fluid={media.file.url}
                 alt={media.file.title}
                 onClick={() => handleClick(key)}
-                fadeIn
                 style={{ width: '100%', height: 'auto' }}
               />
             </div>

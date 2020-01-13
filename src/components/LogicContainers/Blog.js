@@ -35,6 +35,7 @@ const Blog = props => {
             contentfulAbout {
               backgroundImages {
                 fluid {
+                  tracedSVG
                   srcWebp
                   srcSetWebp
                   srcSet

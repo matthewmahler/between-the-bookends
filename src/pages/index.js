@@ -117,6 +117,7 @@ const HomePage = () => {
               name
               landingImage {
                 fluid {
+                  tracedSVG
                   srcWebp
                   srcSetWebp
                   srcSet
@@ -128,6 +129,7 @@ const HomePage = () => {
               }
               backgroundImages {
                 fluid {
+                  tracedSVG
                   srcWebp
                   srcSetWebp
                   srcSet

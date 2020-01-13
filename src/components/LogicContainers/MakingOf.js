@@ -22,7 +22,6 @@ const MakingOf = props => {
             contentfulAbout {
               backgroundImages {
                 fluid {
-                  tracedSVG
                   srcWebp
                   srcSetWebp
                   srcSet

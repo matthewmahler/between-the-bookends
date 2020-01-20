@@ -77,7 +77,7 @@ const TimeLineMedia = props => {
           ) : (
             <div key={key}>
               <img
-                fluid={media.file.url}
+                src={media.file.url}
                 alt={media.file.title}
                 onClick={() => handleClick(key)}
                 style={{ width: '100%', height: 'auto' }}

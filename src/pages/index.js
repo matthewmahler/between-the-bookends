@@ -81,9 +81,10 @@ const HomePage = () => {
 
     opacity: 1,
   });
-  const correctPassword = 'memory';
+  const correctPassword = 'testing';
   const { values, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
+  const [wrong, setWrong] = useState(null);
   const [pageIndex, setPage] = useState(0);
   const [pageBackground, setPageBackground] = useState(
     Math.floor(Math.random() * 7)
@@ -104,7 +105,7 @@ const HomePage = () => {
     if (values.password === correctPassword) {
       toggleLogin(true);
     } else {
-      console.log(values.password);
+      setWrong('Nope, Nice try though');
     }
   }
 
@@ -159,6 +160,7 @@ const HomePage = () => {
                     handleSubmit={handleSubmit}
                     isLoggedIn={isLoggedIn}
                     password={values.password}
+                    wrong={wrong}
                   />
                 </BackgroundImage>
               ) : (

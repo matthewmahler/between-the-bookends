@@ -1,6 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
 import { animated, useSpring } from 'react-spring';
 import MakingOfContainer from '../StyledContainers/MakingOfContainer';
 import TimeLineMedia from '../TimeLineMedia';
@@ -47,47 +46,33 @@ const MakingOf = props => {
           }
         `}
         render={data => {
-          const index = Math.round(Math.random() * 7);
-          const currentBG = data.contentfulAbout.backgroundImages[index].fluid;
-          let sources = [];
-          data.contentfulMaking.media.map((media, key) => {
-            sources.push(media.file.url);
-          });
-
           return (
-            <BackgroundImage
-              Tag="section"
-              fluid={currentBG}
-              fadeIn
-              backgroundColor={props.theme.black}
-            >
-              <MakingOfContainer theme={props.theme} bg={currentBG}>
-                <div className="header">
-                  <h1>{data.contentfulMaking.title}</h1>
-                  <h2>{data.contentfulMaking.subtitle}</h2>
-                </div>
+            <MakingOfContainer theme={props.theme}>
+              <div className="header">
+                <h1>{data.contentfulMaking.title}</h1>
+                <h2>{data.contentfulMaking.subtitle}</h2>
+              </div>
 
-                <Button
-                  handleClick={props.handleClick}
-                  clickIndex={0}
-                  margin="1em "
-                  backgroundColor={props.theme.white}
-                  border={`${props.theme.blue} 1px solid`}
-                  fontColor={props.theme.black}
-                  shadow={props.theme.blueGray}
-                  padding="1em 2em"
-                  size="1em"
-                >
-                  Back
-                </Button>
-                <div className="timeline">
-                  <TimeLineMedia
-                    media={data.contentfulMaking.media.reverse()}
-                    sources={sources.reverse()}
-                  />
-                </div>
-              </MakingOfContainer>
-            </BackgroundImage>
+              <Button
+                handleClick={props.handleClick}
+                clickIndex={0}
+                margin="1em "
+                backgroundColor={props.theme.white}
+                border={`${props.theme.blue} 1px solid`}
+                fontColor={props.theme.black}
+                shadow={props.theme.blueGray}
+                padding="1em 2em"
+                size="1em"
+              >
+                Back
+              </Button>
+              <div className="timeline">
+                <TimeLineMedia
+                  media={data.contentfulMaking.media}
+                  theme={props.theme}
+                />
+              </div>
+            </MakingOfContainer>
           );
         }}
       />

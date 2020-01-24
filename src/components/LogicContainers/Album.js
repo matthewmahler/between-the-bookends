@@ -36,6 +36,7 @@ const Album = props => {
               edges {
                 node {
                   name
+                  releaseDate
                   order
                   repositoryUrl
                   logo {

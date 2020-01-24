@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Countdown from 'react-countdown';
+import moment from 'moment';
 
 const Container = styled.div`
   padding: 1em;
@@ -64,10 +66,32 @@ const Container = styled.div`
   }
 `;
 const Song = props => {
+  const Completionist = () => <h4>Track {props.song.order}</h4>;
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a complete state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      return <h4>{`${days}d ${hours}h ${minutes}m ${seconds}s`}</h4>;
+    }
+  };
+
+  function handleClick() {
+    if (
+      moment()
+        .utc()
+        .isAfter(moment(props.song.releaseDate).utc())
+    ) {
+      props.action();
+    } else {
+      console.log('Nice Try');
+    }
+  }
   return (
-    <Container theme={props.theme} onClick={props.action}>
+    <Container theme={props.theme} onClick={() => handleClick()}>
       <h2>{props.song.name}</h2>
-      <h4>Track {props.song.order}</h4>
+      <Countdown date={props.song.releaseDate} renderer={renderer} />
       <p>
         {props.song.postBody.childMarkdownRemark.excerpt}
         <span>Read More</span>

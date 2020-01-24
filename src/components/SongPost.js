@@ -117,7 +117,6 @@ const SongPost = props => {
       return line.concat('<br/>');
     })
     .join('');
-  console.log(lyrics);
   return (
     <Container theme={props.theme} showPost={props.showPost} flipped={flipped}>
       <animated.div

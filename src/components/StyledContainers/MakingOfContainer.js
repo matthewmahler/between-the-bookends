@@ -11,8 +11,8 @@ const Container = styled.div`
   overflow: auto;
   .header {
     width: auto;
-    background: ${props => props.theme.black}ee;
-    border-radius: 2em;
+    background: ${props => props.theme.black}cc;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,11 +40,8 @@ const Container = styled.div`
   }
 
   .timeline {
-    min-width: 80vw;
-    width: auto;
     max-width: 960px;
-    list-style: none;
-    padding: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,6 +59,8 @@ const Container = styled.div`
       }
     }
     .timeline {
+      max-width: 85vw;
+
       display: flex;
       flex-direction: column;
       align-items: center;

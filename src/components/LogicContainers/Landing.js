@@ -58,6 +58,14 @@ const Container = styled.div`
     font-size: 3em;
     letter-spacing: 3px;
     color: ${props => props.theme.blue};
+    margin-bottom: 1rem;
+  }
+  p {
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: ${props => (props.wrong ? 'auto' : 'none')};
+    color: ${props => props.theme.white};
+    margin-top: 0;
   }
 
   @media (max-width: 450px) {
@@ -76,8 +84,9 @@ const Container = styled.div`
 
 const Landing = props => {
   return (
-    <Container theme={props.theme} bg={props.bg}>
+    <Container theme={props.theme} bg={props.bg} wrong={props.wrong}>
       <h1>between the bookends</h1>
+      <p>{props.wrong}</p>
       <form onSubmit={props.handleSubmit}>
         <input
           type="password"

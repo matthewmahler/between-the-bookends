@@ -1,93 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import FsLightbox from 'fslightbox-react';
-import Masonry from 'react-masonry-css';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import usePrevious from '../hooks/usePrevious';
 
 const Container = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-
-  button {
-    margin: 0 1em;
-    background-color: ${props => props.theme.white};
-    border: ${props => props.theme.blue} 1px solid;
-    color: ${props => props.theme.black};
-    box-shadow: 0 6px ${props => props.theme.blueGray};
-    padding: 1em 2em;
-    size: 1em;
+  padding-bottom: 3rem;
+  .slick-arrow {
+    transform: scale(1.5);
   }
-  .my-masonry-grid {
-    display: -webkit-box; /* Not needed if autoprefixing */
-    display: -ms-flexbox; /* Not needed if autoprefixing */
-    display: flex;
-    width: auto;
+  .box {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    img,
+    video {
+      max-width: 100%;
+      max-height: 70vh;
+      margin: auto;
+    }
   }
-  .my-masonry-grid_column {
-    background-clip: padding-box;
-  }
-  .my-masonry-grid_column > div {
-    /* change div to reference your elements you put in <Masonry> */
-    background: transparent;
-  }
-
-  img,
-  video {
-    width: 100%;
-  }
-  .fslightbox-toolbar-button:nth-child(1) {
-    display: none;
+  @media (max-width: 768px) {
+    .slick-arrow {
+      transform: scale(1);
+    }
   }
 `;
 
 const TimeLineMedia = props => {
-  const [toggler, setToggler] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const prevSlide = usePrevious(activeSlide);
+  const didMountRef = useRef(false);
 
-  const handleClick = i => {
-    setIndex(i);
-    setToggler(!toggler);
+  useEffect(() => {
+    if (didMountRef.current) {
+      let previous = document.getElementById(`media-${prevSlide}`);
+      if (previous.tagName === 'VIDEO') {
+        previous.pause();
+      }
+    } else {
+      let previous = document.getElementById(`media-0`);
+      if (previous.tagName === 'VIDEO') {
+        previous.pause();
+      }
+      didMountRef.current = true;
+    }
+  }, [activeSlide]);
 
-    console.log(i);
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 100,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    adaptiveHeight: true,
+    accessibility: true,
+    beforeChange: (current, next) => setActiveSlide(next),
   };
 
-  const breakpointColumnsObj = {
-    default: 5,
-    1200: 4,
-    991: 3,
-    768: 2,
-  };
   return (
     <Container theme={props.theme}>
-      <FsLightbox toggler={toggler} sources={props.sources} slide={index + 1} />
-
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
+      <Slider {...settings}>
         {props.media.map((media, key) => {
           return media.file.contentType.includes('video') ? (
-            <div key={key}>
-              <video
-                src={media.file.url}
-                onClick={() => handleClick(key)}
-                id={`video${key}`}
-              />
+            <div className="box" key={key}>
+              <video src={media.file.url} id={`media-${key}`} controls />
             </div>
           ) : (
-            <div key={key}>
+            <div className="box" key={key}>
               <img
                 src={media.file.url}
                 alt={media.file.title}
-                onClick={() => handleClick(key)}
-                style={{ width: '100%', height: 'auto' }}
+                id={`media-${key}`}
               />
             </div>
           );
         })}
-      </Masonry>
+      </Slider>
     </Container>
   );
 };
 
 export default TimeLineMedia;
+
+// get a ref for each slide
+// before change hook
+// pause the video

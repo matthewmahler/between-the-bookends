@@ -28,7 +28,7 @@ const Container = styled.div`
     .wrapper {
       max-height: 100vh;
       grid-template-columns: 1fr;
-      grid-gap: 0.3em;
+      grid-gap: 0.5em;
     }
     .back {
       font-size: 0.8em;

@@ -13,7 +13,7 @@ const Container = styled.div`
     width: 100%;
     max-width: 960px;
     box-sizing: border-box;
-    background: ${props => props.theme.black}ee;
+    background: ${props => props.theme.black}dd;
     color: ${props => props.theme.white};
     padding: 3em;
     border-radius: 30px;

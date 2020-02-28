@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: scroll;
   div.about {
     display: flex;
     flex-direction: column;
@@ -18,6 +19,7 @@ const Container = styled.div`
     padding: 3em;
     border-radius: 30px;
     max-height: 100vh;
+    overflow: scroll;
     h1 {
       font-size: 4em;
       margin: 0 auto;
@@ -27,10 +29,7 @@ const Container = styled.div`
         0px 8px 13px ${props => props.theme.darkBlue}55,
         0px 18px 23px ${props => props.theme.darkBlue}33;
     }
-    .bio {
-      max-height: 60vh;
-      overflow: scroll;
-    }
+
     div.buttons {
       width: auto;
     }

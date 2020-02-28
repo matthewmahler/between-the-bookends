@@ -17,6 +17,7 @@ const Container = styled.div`
     color: ${props => props.theme.white};
     padding: 3em;
     border-radius: 30px;
+    max-height: 100vh;
     h1 {
       font-size: 4em;
       margin: 0 auto;
@@ -25,6 +26,10 @@ const Container = styled.div`
       text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
         0px 8px 13px ${props => props.theme.darkBlue}55,
         0px 18px 23px ${props => props.theme.darkBlue}33;
+    }
+    .bio {
+      max-height: 60vh;
+      overflow: scroll;
     }
     div.buttons {
       width: auto;

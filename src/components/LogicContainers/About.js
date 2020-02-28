@@ -54,6 +54,7 @@ const About = props => {
               <div className="about">
                 <h1>About The Record</h1>
                 <div
+                  className="bio"
                   dangerouslySetInnerHTML={{
                     __html: aboutMe.childMarkdownRemark.html,
                   }}

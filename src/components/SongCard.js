@@ -48,7 +48,7 @@ const Container = styled.div`
     min-height: 40px;
     max-height: 64px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2.75fr 1fr;
     padding: 0.7em;
     box-shadow: 0px 2px 1px 0 ${props => props.theme.blue}99,
       0px 4px 7px 0 ${props => props.theme.darkBlue}55,
@@ -90,7 +90,13 @@ const Song = props => {
   }
   return (
     <Container theme={props.theme} onClick={() => handleClick()}>
-      <h2>{props.song.name}</h2>
+      {moment()
+        .utc()
+        .isAfter(moment(props.song.releaseDate).utc()) ? (
+        <h2>{props.song.name}</h2>
+      ) : (
+        <h2>Track {props.song.order}</h2>
+      )}
       <Countdown date={props.song.releaseDate} renderer={renderer} />
       <p>
         {props.song.postBody.childMarkdownRemark.excerpt}

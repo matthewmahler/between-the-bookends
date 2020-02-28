@@ -43,5 +43,12 @@ module.exports = {
         accessToken: process.env.GATSBY_ACCESS_TOKEN,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Trirong`, `Montserrat`],
+        display: 'swap',
+      },
+    },
   ],
 };

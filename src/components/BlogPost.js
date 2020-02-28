@@ -52,10 +52,6 @@ const Container = styled.div`
     h1 {
       font-size: 2em;
     }
-    .flipper {
-      margin: 0.5em;
-    }
-
     .close {
       position: relative;
     }

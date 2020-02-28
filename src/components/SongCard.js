@@ -40,7 +40,7 @@ const Container = styled.div`
     margin: 0.5em auto;
   }
   p {
-    font-size: 0.9em;
+    font-size: 0.8em;
     margin: 0 auto;
     max-width: 80%;
   }
@@ -54,11 +54,11 @@ const Container = styled.div`
       0px 4px 7px 0 ${props => props.theme.darkBlue}55,
       0px 9px 12px 0 ${props => props.theme.darkBlue}33;
     h2 {
-      font-size: 1em;
+      font-size: 0.95em;
       border-bottom: 1px solid ${props => props.theme.blue};
     }
     h4 {
-      font-size: 0.8em;
+      font-size: 0.65em;
     }
     p {
       display: none;

@@ -74,7 +74,12 @@ const TimeLineMedia = props => {
         {props.media.map((media, key) => {
           return media.file.contentType.includes('video') ? (
             <div className="box" key={key}>
-              <video src={media.file.url} id={`media-${key}`} controls />
+              <video
+                src={media.file.url}
+                id={`media-${key}`}
+                controls
+                preload
+              />
             </div>
           ) : (
             <div className="box" key={key}>

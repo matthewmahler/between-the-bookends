@@ -28,14 +28,17 @@ const theme = {
 };
 
 const GlobalStyle = createGlobalStyle`
-/* html{
-    font-family: 'miller', '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', sans-serif; 
-  } */
+html{
+  font-family: "Montserrat", sans-serif; 
+}
+   
 
   body {
     margin:0;
     h1,
-    h2{
+    h2,
+    h3, 
+    h4{
   font-family: 'miller';
 
 }
@@ -46,7 +49,10 @@ const GlobalStyle = createGlobalStyle`
     html{
       margin: 0;
     }
-    h1{
+    h1,
+    h2,
+    h3,
+    h4{
       font-family: 'miller';
       text-align: center;
     }
@@ -81,7 +87,7 @@ const HomePage = () => {
 
     opacity: 1,
   });
-  const correctPassword = 'testing';
+  const correctPassword = 'TheLastDaysOfOurYouth';
   const { values, handleChange, handleSubmit } = useForm(enter);
   const [isLoggedIn, toggleLogin] = useState(false);
   const [wrong, setWrong] = useState(null);

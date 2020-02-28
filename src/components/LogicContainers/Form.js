@@ -93,21 +93,8 @@ const Form = props => {
       .then(space => space.getEnvironment('master'))
       .then(environment => environment.getEntry(blogPageId))
       .then(entry => entry.publish())
-      .then(() => triggerRebuild(blogPageId))
       .catch(console.error);
-    updateProgress(95);
-  }
-  function triggerRebuild(entry_id) {
-    const url = `https://api.netlify.com/build_hooks/5cddeec89caf5bf9cf5b4fba?trigger_title=${entry_id}`;
-
-    fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, cors, *same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    }).then(response => {
-      updateProgress(100);
-      handleSubmission(true);
-    });
+    updateProgress(100);
   }
 
   return (

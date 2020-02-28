@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring, useTransition } from 'react-spring';
-
 import AlbumContainer from '../StyledContainers/AlbumContainer';
 import SongCardWrapper from '../SongCardWrapper';
 import SongPost from '../SongPost';
@@ -23,6 +22,7 @@ const Album = props => {
     leave: { opacity: 0 },
     immediate: !showPost,
   });
+
   function handleCardClick(index, toggle) {
     setSong(index);
     togglePost(toggle);
@@ -109,18 +109,3 @@ const Album = props => {
 };
 
 export default Album;
-
-// position: absolute;
-//     margin: 1em;
-//     padding: 0.5em;
-//     top: 50%;
-//     left: 0;
-//     border: 1px solid ${props => props.theme.blue};
-//     border-radius: 0.5em;
-//     background-color: ${props => props.theme.white};
-//     color: ${props => props.theme.black};
-//     cursor: pointer;
-//     :hover {
-//       background-color: ${props => props.theme.lightGray};
-//       color: ${props => props.theme.blue};
-//     }

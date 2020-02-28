@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
+  position: relative;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -63,10 +65,9 @@ const Container = styled.div`
   }
   @media (max-width: 450px) {
     .wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      max-height: 100vh;
+      grid-template-columns: 1fr;
+      grid-gap: 0.5em;
     }
     .back {
       font-size: 0.7em !important;

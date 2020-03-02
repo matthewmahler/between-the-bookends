@@ -14,6 +14,7 @@ const Container = styled.div`
   width: 100%;
   padding-bottom: 3rem;
   .slick-arrow {
+    color: ${props => props.theme.blue};
     transform: scale(1.5);
   }
   .box {

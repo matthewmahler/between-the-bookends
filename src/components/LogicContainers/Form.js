@@ -115,7 +115,7 @@ const Form = props => {
                 type="text"
                 name="title"
                 onChange={handleChange}
-                value={values.title}
+                value={values.title || ''}
                 required
               />
             </div>
@@ -126,7 +126,7 @@ const Form = props => {
                 type="textarea"
                 name="postBody"
                 onChange={handleChange}
-                value={values.postBody}
+                value={values.postBody || ''}
                 required
               />
             </div>
@@ -138,7 +138,7 @@ const Form = props => {
                   type="date"
                   name="postDate"
                   onChange={handleChange}
-                  value={values.postDate}
+                  value={values.postDate || ''}
                   required
                 />
               </div>
@@ -149,7 +149,7 @@ const Form = props => {
                   type="text"
                   name="signature"
                   onChange={handleChange}
-                  value={values.signature}
+                  value={values.signature || ''}
                 />
               </div>
             </div>

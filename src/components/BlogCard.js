@@ -93,7 +93,7 @@ const BlogCard = props => {
       <h4>{moment(props.blogPost.postDate).format('MM-DD-YYYY')}</h4>
       <p>
         {props.blogPost.postBody.childMarkdownRemark.excerpt}
-        <span>Read More</span>
+        <span>...Read More</span>
       </p>
     </Container>
   );

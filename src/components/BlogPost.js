@@ -76,7 +76,9 @@ const BlogPost = props => {
   return (
     <Container theme={props.theme} showPost={props.showPost}>
       <h1>{props.blogPost.title}</h1>
-      <h4>{props.blogPost.signature}</h4>
+      <h4>
+        {props.blogPost.signature ? props.blogPost.signature : 'Anonymous'}
+      </h4>
       <div
         dangerouslySetInnerHTML={{
           __html: props.blogPost.postBody.childMarkdownRemark.html,

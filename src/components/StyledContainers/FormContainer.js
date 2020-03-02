@@ -50,6 +50,7 @@ const Container = styled.div`
     .title,
     .postBody {
       min-width: 30vw;
+      width: 90%;
     }
     .postBody {
       min-height: 40vh;

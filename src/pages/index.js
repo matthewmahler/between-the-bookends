@@ -89,7 +89,7 @@ const HomePage = () => {
   });
   const correctPassword = 'TheLastDaysOfOurYouth';
   const { values, handleChange, handleSubmit } = useForm(enter);
-  const [isLoggedIn, toggleLogin] = useState(false);
+  const [isLoggedIn, toggleLogin] = useState(true);
   const [wrong, setWrong] = useState(null);
   const [pageIndex, setPage] = useState(0);
   const [pageBackground, setPageBackground] = useState(

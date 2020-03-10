@@ -10,17 +10,34 @@ const Container = styled.div`
   justify-content: center;
   overflow: auto;
   .header {
-    width: auto;
-    background: ${props => props.theme.black}cc;
-    border-radius: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 2em;
-    margin-top: 2em;
-    min-width: 50vw;
+    width: 100%;
     max-width: 960px;
+    box-sizing: border-box;
+    background: ${props => props.theme.black}dd;
+    color: ${props => props.theme.white};
+    padding: 3em;
+    border-radius: 30px;
+
+    .making {
+      max-height: 50vh;
+      overflow: scroll;
+    }
+    button {
+      margin: 1em;
+      padding: 1em;
+      border: 1px solid ${props => props.theme.blue};
+      border-radius: 0.5em;
+      background-color: transparent;
+      color: ${props => props.theme.blue};
+      cursor: pointer;
+      :hover {
+        background-color: ${props => props.theme.lightGray};
+        color: ${props => props.theme.blue};
+      }
+    }
     h1 {
       border-bottom: 3px solid ${props => props.theme.blue};
       color: ${props => props.theme.white};

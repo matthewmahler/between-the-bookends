@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring } from 'react-spring';
 import MakingOfContainer from '../StyledContainers/MakingOfContainer';
@@ -13,6 +13,7 @@ const MakingOf = props => {
 
     opacity: 1,
   });
+  const [toggle, setToggle] = useState(false);
   return (
     <animated.div style={fade}>
       <StaticQuery
@@ -34,7 +35,11 @@ const MakingOf = props => {
             contentfulMaking {
               title
               subtitle
-
+              body {
+                childMarkdownRemark {
+                  html
+                }
+              }
               media {
                 title
                 file {
@@ -51,6 +56,21 @@ const MakingOf = props => {
               <div className="header">
                 <h1>{data.contentfulMaking.title}</h1>
                 <h2>{data.contentfulMaking.subtitle}</h2>
+                {!toggle && (
+                  <div
+                    className="making"
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        data.contentfulMaking.body.childMarkdownRemark.html,
+                    }}
+                  />
+                )}
+                <button
+                  className="flipper"
+                  onClick={() => setToggle(toggle => !toggle)}
+                >
+                  {toggle ? 'View Story' : 'View Gallery'}
+                </button>
               </div>
 
               <Button
@@ -66,12 +86,14 @@ const MakingOf = props => {
               >
                 Back
               </Button>
-              <div className="timeline">
-                <TimeLineMedia
-                  media={data.contentfulMaking.media}
-                  theme={props.theme}
-                />
-              </div>
+              {toggle && (
+                <div className="timeline">
+                  <TimeLineMedia
+                    media={data.contentfulMaking.media}
+                    theme={props.theme}
+                  />
+                </div>
+              )}
             </MakingOfContainer>
           );
         }}

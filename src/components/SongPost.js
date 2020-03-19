@@ -18,15 +18,23 @@ const Container = styled.div`
     color: ${props => props.theme.white};
     margin: 1em auto;
     overflow: auto;
-    h1 {
-      font-size: 3em;
-      margin: 0 auto;
-      padding: 0.1em;
-      border-bottom: 2px solid ${props => props.theme.blue};
-      text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
-        0px 8px 13px ${props => props.theme.darkBlue}55,
-        0px 18px 23px ${props => props.theme.darkBlue}33;
+    a {
+      color: inherit;
+      text-decoration: none;
+      h1 {
+        font-size: 3em;
+        margin: 0 auto;
+        padding: 0.1em;
+        border-bottom: 2px solid ${props => props.theme.blue};
+        text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
+          0px 8px 13px ${props => props.theme.darkBlue}55,
+          0px 18px 23px ${props => props.theme.darkBlue}33;
+      }
+      :hover {
+        filter: brightness(1.5);
+      }
     }
+
     h4 {
       margin: 0.5em auto;
     }
@@ -123,7 +131,13 @@ const SongPost = props => {
         className="story"
         style={{ opacity: opacity.interpolate(o => 1 - o), transform }}
       >
-        <h1>{props.song.name}</h1>
+        <a
+          href={props.song.repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h1>{props.song.name}</h1>
+        </a>
         <h4>Track {props.song.order}</h4>
         <button
           className="flipper"
@@ -147,7 +161,13 @@ const SongPost = props => {
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),
         }}
       >
-        <h1>{props.song.name}</h1>
+        <a
+          href={props.song.repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h1>{props.song.name}</h1>
+        </a>
         <h4>Track {props.song.order}</h4>
         <button
           className="flipper"

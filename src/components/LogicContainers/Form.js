@@ -95,6 +95,7 @@ const Form = props => {
       .then(entry => entry.publish())
       .catch(console.error);
     updateProgress(100);
+    handleSubmission(true);
   }
 
   return (

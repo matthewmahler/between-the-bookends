@@ -69,7 +69,7 @@ const Container = styled.div`
   min-height: 100vh;
 
   background-size: cover;
-  box-shadow: 0 0 2em 2em ${props => props.theme.black} inset;
+  box-shadow: 0 0 2em 2em ${(props) => props.theme.black} inset;
   min-height: 100vh;
   display: grid;
   justify-items: center;
@@ -89,7 +89,7 @@ const HomePage = () => {
   });
   const correctPassword = 'TheLastDaysOfOurYouth';
   const { values, handleChange, handleSubmit } = useForm(enter);
-  const [isLoggedIn, toggleLogin] = useState(false);
+  const [isLoggedIn, toggleLogin] = useState(true);
   const [wrong, setWrong] = useState(null);
   const [pageIndex, setPage] = useState(0);
   const [pageBackground, setPageBackground] = useState(

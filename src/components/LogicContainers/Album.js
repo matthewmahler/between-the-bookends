@@ -4,9 +4,9 @@ import { animated, useSpring, useTransition } from 'react-spring';
 import AlbumContainer from '../StyledContainers/AlbumContainer';
 import SongCardWrapper from '../SongCardWrapper';
 import SongPost from '../SongPost';
-import Button from '../UI/Button';
+import Nav from '../Nav';
 
-const Album = props => {
+const Album = ({ theme }) => {
   const [chosenSong, setSong] = useState(0);
   const [showPost, togglePost] = useState(false);
   const fade = useSpring({
@@ -16,6 +16,11 @@ const Album = props => {
 
     opacity: 1,
   });
+  const links = [
+    { text: 'Home', path: '/' },
+    { text: 'Making Of', path: '/TheProcess' },
+    { text: 'Your Stories', path: '/TheBookshelf' },
+  ];
   const transitions = useTransition(showPost, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -61,11 +66,11 @@ const Album = props => {
             }
           }
         `}
-        render={data => {
+        render={(data) => {
           const songs = data.allContentfulAlbum.edges;
 
           return (
-            <AlbumContainer theme={props.theme} showPost={!showPost}>
+            <AlbumContainer theme={theme} showPost={!showPost}>
               {transitions.map(({ item, key, props: animation }) =>
                 !item ? (
                   <SongCardWrapper
@@ -73,12 +78,12 @@ const Album = props => {
                     songs={songs}
                     showPost={showPost}
                     handleCardClick={handleCardClick}
-                    theme={props.theme}
+                    theme={theme}
                   />
                 ) : (
                   <animated.div style={animation} key={key}>
                     <SongPost
-                      theme={props.theme}
+                      theme={theme}
                       song={songs[chosenSong].node}
                       showPost={showPost}
                       action={() => handleCardClick(0, !showPost)}
@@ -87,19 +92,7 @@ const Album = props => {
                 )
               )}
 
-              <Button
-                handleClick={props.handleClick}
-                clickIndex={0}
-                margin="1em "
-                backgroundColor={props.theme.white}
-                border={`${props.theme.blue} 1px solid`}
-                fontColor={props.theme.black}
-                shadow={props.theme.blueGray}
-                padding="1em 2em"
-                size="1em"
-              >
-                Back
-              </Button>
+              <Nav links={links} />
             </AlbumContainer>
           );
         }}

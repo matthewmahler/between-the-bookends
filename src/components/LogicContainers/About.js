@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring } from 'react-spring';
 import AboutContainer from '../StyledContainers/AboutContainer';
-import Button from '../UI/Button';
+import Nav from '../Nav';
 
-const About = props => {
+const About = (props) => {
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -41,12 +41,12 @@ const About = props => {
             }
           }
         `}
-        render={data => {
+        render={(data) => {
           const { aboutMe, profileImages } = data.contentfulAbout;
-          const buttons = [
-            { text: 'The Record', clickIndex: 1 },
-            { text: 'Making Of', clickIndex: 2 },
-            { text: 'Your Stories', clickIndex: 3 },
+          const links = [
+            { text: 'The Record', path: '/TheRecord' },
+            { text: 'Making Of', path: '/TheProcess' },
+            { text: 'Your Stories', path: '/TheBookshelf' },
           ];
 
           return (
@@ -63,9 +63,12 @@ const About = props => {
                   {profileImages.map((img, i) => {
                     return (
                       <div
+                        role="presentation"
                         className="profileImageContainer"
                         onMouseOver={() => setHovered(i)}
                         onMouseOut={() => setHovered(null)}
+                        onFocus={() => setHovered(i)}
+                        onBlur={() => setHovered(null)}
                         key={i}
                       >
                         <img
@@ -89,25 +92,8 @@ const About = props => {
                     );
                   })}
                 </div>
-                <div className="buttons">
-                  {buttons.map((button, i) => (
-                    <Button
-                      handleClick={props.handleClick}
-                      clickIndex={button.clickIndex}
-                      margin="2em"
-                      backgroundColor={props.theme.blue}
-                      border={`${props.theme.white} 1px solid`}
-                      fontColor={props.theme.white}
-                      shadow={props.theme.blueGray}
-                      padding="0.5em 1em"
-                      size="1em"
-                      key={i}
-                    >
-                      {button.text}
-                    </Button>
-                  ))}
-                </div>
               </div>
+              <Nav links={links} />
             </AboutContainer>
           );
         }}

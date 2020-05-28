@@ -6,7 +6,7 @@ const Container = styled.div`
   position: relative;
   .story,
   .lyrics {
-    display: ${props => (props.showPost ? 'flex' : 'none')};
+    display: ${(props) => (props.showPost ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     padding: 1em;
@@ -14,10 +14,10 @@ const Container = styled.div`
     border-radius: 20px;
     max-width: 960px;
     padding: 1em;
-    background-color: ${props => props.theme.black}ee;
-    color: ${props => props.theme.white};
+    background-color: ${(props) => props.theme.black}ee;
+    color: ${(props) => props.theme.white};
     margin: 1em auto;
-    overflow: auto;
+    overflow-y: auto;
     a {
       color: inherit;
       text-decoration: none;
@@ -25,10 +25,10 @@ const Container = styled.div`
         font-size: 3em;
         margin: 0 auto;
         padding: 0.1em;
-        border-bottom: 2px solid ${props => props.theme.blue};
-        text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
-          0px 8px 13px ${props => props.theme.darkBlue}55,
-          0px 18px 23px ${props => props.theme.darkBlue}33;
+        border-bottom: 2px solid ${(props) => props.theme.blue};
+        text-shadow: 0px 4px 3px ${(props) => props.theme.blue}99,
+          0px 8px 13px ${(props) => props.theme.darkBlue}55,
+          0px 18px 23px ${(props) => props.theme.darkBlue}33;
       }
       :hover {
         filter: brightness(1.5);
@@ -45,12 +45,12 @@ const Container = styled.div`
     }
   }
   .story {
-    display: ${props => (props.flipped ? 'none' : 'auto')};
+    display: ${(props) => (props.flipped ? 'none' : 'auto')};
   }
   .lyrics {
-    display: ${props => (!props.flipped ? 'none' : 'auto')};
+    display: ${(props) => (!props.flipped ? 'none' : 'auto')};
     .lyricsContainer {
-      overflow: scroll;
+      overflow-y: scroll;
       max-height: 70vh;
 
       p {
@@ -62,14 +62,14 @@ const Container = styled.div`
   button {
     margin: 1em;
     padding: 0.5em;
-    border: 1px solid ${props => props.theme.blue};
+    border: 1px solid ${(props) => props.theme.blue};
     border-radius: 0.5em;
     background-color: transparent;
-    color: ${props => props.theme.blue};
+    color: ${(props) => props.theme.blue};
     cursor: pointer;
     :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
+      background-color: ${(props) => props.theme.lightGray};
+      color: ${(props) => props.theme.blue};
     }
   }
 
@@ -95,11 +95,11 @@ const Container = styled.div`
   @media (max-width: 450px) {
     .story,
     .lyrics {
-      background-color: ${props => props.theme.black};
+      background-color: ${(props) => props.theme.black};
       max-height: 95vh;
       div {
         max-height: 70vh;
-        overflow: auto;
+        overflow-y: auto;
       }
     }
     .close,
@@ -111,7 +111,7 @@ const Container = styled.div`
   }
 `;
 
-const SongPost = props => {
+const SongPost = (props) => {
   const [flipped, flipCard] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -129,7 +129,7 @@ const SongPost = props => {
     <Container theme={props.theme} showPost={props.showPost} flipped={flipped}>
       <animated.div
         className="story"
-        style={{ opacity: opacity.interpolate(o => 1 - o), transform }}
+        style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
       >
         <a
           href={props.song.repositoryUrl}
@@ -141,7 +141,7 @@ const SongPost = props => {
         <h4>Track {props.song.order}</h4>
         <button
           className="flipper"
-          onClick={() => flipCard(flipped => !flipped)}
+          onClick={() => flipCard((flipped) => !flipped)}
         >
           Click For Lyrics
         </button>
@@ -158,7 +158,7 @@ const SongPost = props => {
         className="lyrics"
         style={{
           opacity,
-          transform: transform.interpolate(t => `${t} rotateX(180deg)`),
+          transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
         }}
       >
         <a
@@ -171,7 +171,7 @@ const SongPost = props => {
         <h4>Track {props.song.order}</h4>
         <button
           className="flipper"
-          onClick={() => flipCard(flipped => !flipped)}
+          onClick={() => flipCard((flipped) => !flipped)}
         >
           Click For Story
         </button>

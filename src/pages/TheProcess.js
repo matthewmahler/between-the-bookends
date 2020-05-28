@@ -1,11 +1,10 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import Layout from '../components/Layout';
-import About from '../components/LogicContainers/About';
-import '../fonts/fonts.css';
+import MakingOf from '../components/LogicContainers/MakingOf';
 import { theme } from '../components/theme';
 
-const HomePage = () => {
+const TheProcess = () => {
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -13,14 +12,13 @@ const HomePage = () => {
 
     opacity: 1,
   });
-
   return (
     <animated.div style={fade}>
       <Layout>
-        <About theme={theme} />
+        <MakingOf theme={theme} />
       </Layout>
     </animated.div>
   );
 };
 
-export default HomePage;
+export default TheProcess;

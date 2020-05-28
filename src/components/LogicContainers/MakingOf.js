@@ -3,9 +3,8 @@ import { StaticQuery, graphql } from 'gatsby';
 import { animated, useSpring } from 'react-spring';
 import MakingOfContainer from '../StyledContainers/MakingOfContainer';
 import TimeLineMedia from '../TimeLineMedia';
-import Button from '../UI/Button';
-
-const MakingOf = props => {
+import Nav from '../Nav';
+const MakingOf = (props) => {
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -13,6 +12,11 @@ const MakingOf = props => {
 
     opacity: 1,
   });
+  const links = [
+    { text: 'Home', path: '/' },
+    { text: 'The Record', path: '/TheRecord' },
+    { text: 'Your Stories', path: '/TheBookshelf' },
+  ];
   const [toggle, setToggle] = useState(false);
   return (
     <animated.div style={fade}>
@@ -50,7 +54,7 @@ const MakingOf = props => {
             }
           }
         `}
-        render={data => {
+        render={(data) => {
           return (
             <MakingOfContainer theme={props.theme}>
               <div className="header">
@@ -67,25 +71,12 @@ const MakingOf = props => {
                 )}
                 <button
                   className="flipper"
-                  onClick={() => setToggle(toggle => !toggle)}
+                  onClick={() => setToggle((toggle) => !toggle)}
                 >
                   {toggle ? 'View Story' : 'View Gallery'}
                 </button>
               </div>
 
-              <Button
-                handleClick={props.handleClick}
-                clickIndex={0}
-                margin="1em "
-                backgroundColor={props.theme.white}
-                border={`${props.theme.blue} 1px solid`}
-                fontColor={props.theme.black}
-                shadow={props.theme.blueGray}
-                padding="1em 2em"
-                size="1em"
-              >
-                Back
-              </Button>
               {toggle && (
                 <div className="timeline">
                   <TimeLineMedia
@@ -94,6 +85,7 @@ const MakingOf = props => {
                   />
                 </div>
               )}
+              <Nav links={links} />
             </MakingOfContainer>
           );
         }}

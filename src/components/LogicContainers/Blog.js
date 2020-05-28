@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import { animated, useSpring, useTransition } from 'react-spring';
 import BlogPost from '../BlogPost';
 import BlogCardWrapper from '../BlogCardWrapper';
 import BlogContainer from '../StyledContainers/BlogContainer';
-import Button from '../UI/Button';
+import Nav from '../Nav';
 
-const Blog = props => {
+const Blog = (props) => {
   const [chosenBlogPost, setBlogPost] = useState(0);
   const [showPost, togglePost] = useState(false);
   const fade = useSpring({
@@ -22,7 +22,11 @@ const Blog = props => {
     leave: { opacity: 0 },
     immediate: !showPost,
   });
-
+  const links = [
+    { text: 'Home', path: '/' },
+    { text: 'The Record', path: '/TheRecord' },
+    { text: 'Making Of', path: '/TheProcess' },
+  ];
   function handleCardClick(index, toggle) {
     setBlogPost(index);
     togglePost(toggle);
@@ -62,7 +66,7 @@ const Blog = props => {
             }
           }
         `}
-        render={data => {
+        render={(data) => {
           const blogPosts = data.contentfulBlogPage.blogPosts;
 
           const index = Math.round(Math.random() * 7);
@@ -76,12 +80,9 @@ const Blog = props => {
               <div className="blogHeader">
                 <h1>{data.contentfulBlogPage.title}</h1>
                 <p>{data.contentfulBlogPage.subtitle}</p>
-                <button
-                  className="storyButton"
-                  onClick={() => props.handleClick(4)}
-                >
+                <Link className="storyButton" to="/Submit">
                   Write a Story
-                </button>
+                </Link>
               </div>
 
               {transitions.map(({ item, key, props: animation }) =>
@@ -104,19 +105,7 @@ const Blog = props => {
                   </animated.div>
                 )
               )}
-              <Button
-                handleClick={props.handleClick}
-                clickIndex={0}
-                margin="1em "
-                backgroundColor={props.theme.white}
-                border={`${props.theme.blue} 1px solid`}
-                fontColor={props.theme.black}
-                shadow={props.theme.blueGray}
-                padding="1em 2em"
-                size="1em"
-              >
-                Back
-              </Button>
+              <Nav links={links} />
             </BlogContainer>
           );
         }}

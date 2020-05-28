@@ -12,9 +12,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-bottom: 3rem;
   .slick-arrow {
-    color: ${props => props.theme.blue};
+    color: ${(props) => props.theme.blue};
     transform: scale(1.5);
   }
   .box {
@@ -37,7 +36,7 @@ const Container = styled.div`
   }
 `;
 
-const TimeLineMedia = props => {
+const TimeLineMedia = (props) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const prevSlide = usePrevious(activeSlide);
   const didMountRef = useRef(false);
@@ -55,7 +54,7 @@ const TimeLineMedia = props => {
       }
       didMountRef.current = true;
     }
-  }, [activeSlide]);
+  }, [activeSlide, prevSlide]);
 
   const settings = {
     dots: false,

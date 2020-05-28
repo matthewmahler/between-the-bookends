@@ -1,68 +1,58 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 
-const Section = styled.section`
-  background: aliceblue;
-  color: #333;
-  min-height: 100vh;
-  & > h1 {
-    font-size: 28px;
-    font-weight: bold;
-  }
+const GlobalStyle = createGlobalStyle`
+html{
+  font-family: "Montserrat", sans-serif; 
+  scrollbar-color: transparent transparent;
+  scrollbar-width: none;
+  background-color: black;
+}
+   
 
-  & > small {
-    color: #fff;
-    border-radius: 3px;
-    display: inline-block;
-    background: #16799d;
-    font-size: 12px;
-  }
+  body {
+    margin:0;
+    h1,
+    h2,
+    h3, 
+    h4{
+  font-family: 'miller';
 
-  & > article {
-    background: #fff;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
-    position: relative;
-    z-index: 1;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      background: #fff;
-      transform: rotate(-2deg);
-      z-index: -1;
+}
+}
+  
+  @media all and (max-width: 1200px) {
+    html{
+      margin: 0;
     }
+    h1,
+    h2,
+    h3,
+    h4{
+      font-family: 'miller';
+      text-align: center;
+    }
+    
   }
-
-  & > article > h1 {
-    color: #555;
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  & > article > h2 {
-    color: #555;
-    font-size: 21px;
-    font-weight: bold;
-  }
-
-  & > article > p {
-    line-height: 1.6;
-    font-size: 16px;
-  }
-
-  & > article > img {
-    max-width: 100%;
-    height: auto;
+  ::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent; 
   }
 `;
+const Container = styled.div`
+  width: 100vw;
+  min-height: 100vh;
 
+  background-size: cover;
+  box-shadow: 0 0 2em 2em ${(props) => props.theme.black} inset;
+  min-height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+`;
 function Layout({ children }) {
   return (
     <StaticQuery
@@ -73,16 +63,43 @@ function Layout({ children }) {
               title
             }
           }
+          contentfulAbout {
+            backgroundImages {
+              fluid {
+                srcWebp
+                srcSetWebp
+                srcSet
+                src
+                sizes
+                base64
+                aspectRatio
+              }
+            }
+          }
         }
       `}
-      render={data => (
-        <>
-          <Helmet title={data.site.siteMetadata.title}>
-            <html lang="en" />
-          </Helmet>
-          <Section>{children}</Section>
-        </>
-      )}
+      render={(data) => {
+        const pageBackground = Math.floor(Math.random() * 7);
+
+        const currentBG =
+          data.contentfulAbout.backgroundImages[pageBackground].fluid;
+        return (
+          <>
+            <Helmet title={data.site.siteMetadata.title}>
+              <html lang="en" />
+            </Helmet>
+            <GlobalStyle />
+            <BackgroundImage
+              Tag="section"
+              fluid={currentBG}
+              fadeIn
+              backgroundColor="#040404"
+            >
+              <Container>{children}</Container>
+            </BackgroundImage>
+          </>
+        );
+      }}
     />
   );
 }

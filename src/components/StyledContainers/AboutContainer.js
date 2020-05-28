@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
   div.about {
     display: flex;
     flex-direction: column;
@@ -14,25 +15,22 @@ const Container = styled.div`
     width: 100%;
     max-width: 960px;
     box-sizing: border-box;
-    background: ${props => props.theme.black}dd;
-    color: ${props => props.theme.white};
+    background: ${(props) => props.theme.black}dd;
+    color: ${(props) => props.theme.white};
     padding: 3em;
     border-radius: 30px;
     max-height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
     h1 {
       font-size: 4em;
       margin: 0 auto;
-      border-bottom: 3px solid ${props => props.theme.blue};
-      color: ${props => props.theme.white};
-      text-shadow: 0px 4px 3px ${props => props.theme.blue}99,
-        0px 8px 13px ${props => props.theme.darkBlue}55,
-        0px 18px 23px ${props => props.theme.darkBlue}33;
+      border-bottom: 3px solid ${(props) => props.theme.blue};
+      color: ${(props) => props.theme.white};
+      text-shadow: 0px 4px 3px ${(props) => props.theme.blue}99,
+        0px 8px 13px ${(props) => props.theme.darkBlue}55,
+        0px 18px 23px ${(props) => props.theme.darkBlue}33;
     }
 
-    div.buttons {
-      width: auto;
-    }
     @media (max-width: 768px) {
       width: 90%;
       max-width: 700px;
@@ -43,7 +41,7 @@ const Container = styled.div`
       font-size: 0.8em;
       div {
         max-height: 60vh;
-        overflow: auto;
+        overflow-y: auto;
         text-align: center;
       }
       div.buttons {
@@ -51,7 +49,7 @@ const Container = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         margin: 1em auto;
-        button {
+        a {
           margin: 0 0.2em;
           padding: 0.5em;
           font-size: 0.6em;
@@ -78,8 +76,8 @@ const Container = styled.div`
       }
 
       p.overlay {
-        background-color: ${props => props.theme.black};
-        color: ${props => props.theme.white}ff;
+        background-color: ${(props) => props.theme.black};
+        color: ${(props) => props.theme.white}ff;
         position: absolute;
         width: 80%;
         top: 40%;

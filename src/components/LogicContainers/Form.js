@@ -4,12 +4,12 @@ import { createClient } from 'contentful-management';
 import useForm from '../../hooks/useForm';
 import FormContainer from '../StyledContainers/FormContainer';
 import ProgressBar from '../ProgressBar';
-import Button from '../UI/Button';
+import Nav from '../Nav';
 const client = createClient({
   accessToken: process.env.GATSBY_CONTENT_MANAGEMENT_TOKEN,
 });
 
-const Form = props => {
+const Form = (props) => {
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -37,15 +37,15 @@ const Form = props => {
     console.log('post submitted: ', result);
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
-      .then(space => space.getEnvironment('master'))
-      .then(environment =>
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) =>
         environment.createEntryWithId('blogPost', entry_id, {
           fields: {
             ...result,
           },
         })
       )
-      .then(entry => publishEntry(entry, entry_id))
+      .then((entry) => publishEntry(entry, entry_id))
       .catch(console.error);
     setLoading(true);
     updateProgress(25);
@@ -54,9 +54,9 @@ const Form = props => {
     console.log('entry publishing: ', entry);
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
-      .then(space => space.getEnvironment('master'))
-      .then(environment => environment.getEntry(entry_id))
-      .then(entry => entry.publish())
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) => environment.getEntry(entry_id))
+      .then((entry) => entry.publish())
       .then(() => linkEntry(entry_id))
       .catch(console.error);
     updateProgress(50);
@@ -73,9 +73,9 @@ const Form = props => {
     };
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
-      .then(space => space.getEnvironment('master'))
-      .then(environment => environment.getEntry(blogPageId))
-      .then(entry => {
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) => environment.getEntry(blogPageId))
+      .then((entry) => {
         console.log('blogPage updating: ', entry);
 
         entry.fields.blogPosts['en-US'].push(newPost);
@@ -90,14 +90,19 @@ const Form = props => {
     console.log('blogPage republishing publishing:', blogPageId);
     client
       .getSpace(process.env.GATSBY_SPACE_ID)
-      .then(space => space.getEnvironment('master'))
-      .then(environment => environment.getEntry(blogPageId))
-      .then(entry => entry.publish())
+      .then((space) => space.getEnvironment('master'))
+      .then((environment) => environment.getEntry(blogPageId))
+      .then((entry) => entry.publish())
       .catch(console.error);
     updateProgress(100);
     handleSubmission(true);
   }
-
+  const links = [
+    { text: 'Home', path: '/' },
+    { text: 'The Record', path: '/TheRecord' },
+    { text: 'Making Of', path: '/TheProcess' },
+    { text: 'Your Stories', path: '/TheBookshelf' },
+  ];
   return (
     <FormContainer theme={props.theme}>
       <animated.div style={fade}>
@@ -110,22 +115,28 @@ const Form = props => {
           />
           <form action="" onSubmit={handleSubmit}>
             <div className="field">
-              <label className="label">Title</label>
+              <label className="label" htmlFor="title">
+                Title
+              </label>
               <input
                 className="title"
                 type="text"
                 name="title"
+                id="title"
                 onChange={handleChange}
                 value={values.title || ''}
                 required
               />
             </div>
             <div className="field">
-              <label className="label">Body</label>
+              <label className="label" htmlFor="postBody">
+                Body
+              </label>
               <textarea
                 className="postBody"
                 type="textarea"
                 name="postBody"
+                id="postBody"
                 onChange={handleChange}
                 value={values.postBody || ''}
                 required
@@ -133,22 +144,28 @@ const Form = props => {
             </div>
             <div className="dateSig">
               <div className="field">
-                <label className="label">Date</label>
+                <label className="label" htmlFor="postDate">
+                  Date
+                </label>
                 <input
                   className="postDate"
                   type="date"
                   name="postDate"
+                  id="postDate"
                   onChange={handleChange}
                   value={values.postDate || ''}
                   required
                 />
               </div>
               <div className="field">
-                <label className="label">Signature (optional)</label>
+                <label className="label" htmlFor="signature">
+                  Signature (optional)
+                </label>
                 <input
                   className="signature"
                   type="text"
                   name="signature"
+                  id="signature"
                   onChange={handleChange}
                   value={values.signature || ''}
                 />
@@ -157,19 +174,7 @@ const Form = props => {
             <button type="submit">Submit</button>
           </form>
         </div>
-        <Button
-          handleClick={props.handleClick}
-          clickIndex={3}
-          margin="1em "
-          backgroundColor={props.theme.white}
-          border={`${props.theme.blue} 1px solid`}
-          fontColor={props.theme.black}
-          shadow={props.theme.blueGray}
-          padding="1em 2em"
-          size="1em"
-        >
-          Back
-        </Button>
+        <Nav links={links} />
       </animated.div>
     </FormContainer>
   );

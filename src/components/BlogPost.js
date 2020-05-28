@@ -6,21 +6,21 @@ const Container = styled.div`
   padding: 1em;
   box-sizing: border-box;
   border-radius: 20px;
-  display: ${props => (props.showPost ? 'flex' : 'none')};
+  display: ${(props) => (props.showPost ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   width: 50%;
   max-width: 960px;
 
   padding: 1em;
-  background-color: ${props => props.theme.black}ee;
-  color: ${props => props.theme.white};
+  background-color: ${(props) => props.theme.black}ee;
+  color: ${(props) => props.theme.white};
   margin: 1em auto;
   h1 {
     font-size: 3em;
     margin: 0.3em auto;
     padding: 0.1em;
-    border-bottom: 2px solid ${props => props.theme.blue};
+    border-bottom: 2px solid ${(props) => props.theme.blue};
   }
   h4 {
     margin: 0 auto;
@@ -35,14 +35,14 @@ const Container = styled.div`
     padding: 0.5em;
     bottom: 0;
     right: 0;
-    border: 1px solid ${props => props.theme.blue};
+    border: 1px solid ${(props) => props.theme.blue};
     border-radius: 0.5em;
-    background-color: ${props => props.theme.white};
-    color: ${props => props.theme.black};
+    background-color: ${(props) => props.theme.white};
+    color: ${(props) => props.theme.black};
     cursor: pointer;
     :hover {
-      background-color: ${props => props.theme.lightGray};
-      color: ${props => props.theme.blue};
+      background-color: ${(props) => props.theme.lightGray};
+      color: ${(props) => props.theme.blue};
     }
   }
   @media (max-width: 768px) {
@@ -57,11 +57,11 @@ const Container = styled.div`
     }
   }
   @media (max-width: 450px) {
-    background-color: ${props => props.theme.black};
+    background-color: ${(props) => props.theme.black};
     max-height: 95vh;
     div {
       max-height: 70vh;
-      overflow: auto;
+      overflow-y: auto;
     }
 
     .close {
@@ -72,7 +72,7 @@ const Container = styled.div`
   }
 `;
 
-const BlogPost = props => {
+const BlogPost = (props) => {
   return (
     <Container theme={props.theme} showPost={props.showPost}>
       <h1>{props.blogPost.title}</h1>
